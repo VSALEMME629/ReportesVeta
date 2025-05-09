@@ -17,30 +17,34 @@
       font-family: 'Albert Sans', sans-serif;
       background-color: #f5f7fa;
       margin: 0;
+      padding: 0;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
       min-height: 100vh;
-    }
-    .container {
-      background: #fff;
-      padding: 3rem 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.06);
-      text-align: center;
-      max-width: 480px;
       width: 100%;
     }
+
     .logo {
-      height: 48px;
-      margin-bottom: 1rem;
+      width: 220px;
+      margin-top: 40px;
     }
+
     h1 {
       color: #021751;
-      margin-bottom: 2rem;
-      font-size: 1.8rem;
-      font-family: 'Albert Sans', sans-serif;
+      margin-top: 20px;
+      font-size: 2rem;
     }
+
+    .reportes {
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      padding: 40px 20px;
+      box-sizing: border-box;
+    }
+
     .report-link {
       display: block;
       border: 2px solid #1036E2;
@@ -48,11 +52,13 @@
       padding: 1rem;
       margin: 1rem 0;
       color: #021751;
+      text-align: center;
       text-decoration: none;
       font-weight: 600;
       font-family: 'SF Pro', sans-serif;
       transition: all 0.2s ease;
     }
+
     .report-link:hover {
       background-color: #1036E2;
       color: #fff;
@@ -60,9 +66,9 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="./reportes/VetaCap_Brandpack_Positivo-RGB.svg" alt="Vetacap logo" class="logo" />
-    <h1>Reportes Semanales</h1>
+  <img src="./reportes/VetaCap_Brandpack_Positivo-RGB.svg" alt="Vetacap logo" class="logo" />
+  <h1>Reportes Semanales</h1>
+  <div class="reportes">
     <a class="report-link" href="./reportes/Reporte_Comercial.pdf" target="_blank">Reporte Comercial</a>
     <a class="report-link" href="./reportes/Gestion_de_Liquidez.pdf" target="_blank">Gestión de Liquidez</a>
     <a class="report-link" href="./reportes/Cobertura_Cambiaria.pdf" target="_blank">Cobertura Cambiaria</a>
