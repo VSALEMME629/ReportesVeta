@@ -94,9 +94,9 @@
     <img src="./reportes/VetaCap_Brandpack_Positivo-RGB.svg" alt="Vetacap logo" style="width: 200px; margin-bottom: 2rem;" />
     <h1>Reportes Semanales</h1>
     <div class="reportes">
-      <a class="report-link" href="./reportes/Reporte_Comercial.pdf" target="_blank">Reporte Comercial</a>
-      <a class="report-link" href="./reportes/Gestion_de_Liquidez.pdf" target="_blank">Gestión de Liquidez</a>
-      <a class="report-link" href="./reportes/Cobertura_Cambiaria.pdf" target="_blank">Cobertura Cambiaria</a>
+      <a class="report-link" href="https://drive.google.com/file/d/1eNSEh-LZUUbjRhNwmrT_-sR7lswAk2og/view?usp=sharing" target="_blank">Reporte Comercial</a>
+      <a class="report-link" href="https://drive.google.com/file/d/1Z2wWJ4p9h6aY7Pp6Iv0UDdo04nRD0o6i/view?usp=sharing" target="_blank">Gestión de Liquidez</a>
+      <a class="report-link" href="https://drive.google.com/file/d/1QcFUyBWdX5E9sWFbxuW4qufIFGGm_eDy/view?usp=sharing" target="_blank">Cobertura Cambiaria</a>
     </div>
     <button class="logout-btn" onclick="cerrarSesion()">Cerrar sesión</button>
   </div>
@@ -128,7 +128,6 @@
       location.reload();
     }
 
-    // Comprobar si ya estaba logeado y la fecha es de hoy
     const logeado = localStorage.getItem("vetacap_logeado") === "true";
     const fechaGuardada = localStorage.getItem("vetacap_fecha");
     const hoy = new Date().toISOString().split('T')[0];
