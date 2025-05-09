@@ -45,6 +45,11 @@
       font-size: 1rem;
       margin-top: 1rem;
     }
+    .logout-btn {
+      margin-top: 2rem;
+      background-color: #ccc;
+      color: #333;
+    }
     .hidden {
       display: none;
     }
@@ -93,6 +98,7 @@
       <a class="report-link" href="./reportes/Gestion_de_Liquidez.pdf" target="_blank">Gestión de Liquidez</a>
       <a class="report-link" href="./reportes/Cobertura_Cambiaria.pdf" target="_blank">Cobertura Cambiaria</a>
     </div>
+    <button class="logout-btn" onclick="cerrarSesion()">Cerrar sesión</button>
   </div>
 
   <script>
@@ -102,7 +108,9 @@
       const error = document.getElementById("error-msg");
 
       if (user === "comercial" && pass === "vetacap2024") {
+        const hoy = new Date().toISOString().split('T')[0];
         localStorage.setItem("vetacap_logeado", "true");
+        localStorage.setItem("vetacap_fecha", hoy);
         mostrarContenido();
       } else {
         error.textContent = "Usuario o contraseña incorrectos.";
@@ -114,9 +122,22 @@
       document.getElementById("contenido").classList.remove("hidden");
     }
 
-    // Si ya está logeado, mostrar directamente
-    if (localStorage.getItem("vetacap_logeado") === "true") {
+    function cerrarSesion() {
+      localStorage.removeItem("vetacap_logeado");
+      localStorage.removeItem("vetacap_fecha");
+      location.reload();
+    }
+
+    // Comprobar si ya estaba logeado y la fecha es de hoy
+    const logeado = localStorage.getItem("vetacap_logeado") === "true";
+    const fechaGuardada = localStorage.getItem("vetacap_fecha");
+    const hoy = new Date().toISOString().split('T')[0];
+
+    if (logeado && fechaGuardada === hoy) {
       window.onload = mostrarContenido;
+    } else {
+      localStorage.removeItem("vetacap_logeado");
+      localStorage.removeItem("vetacap_fecha");
     }
   </script>
 </body>
