@@ -41,6 +41,18 @@
       transform: translateY(-2px);
     }
     
+    .btn-outline {
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      background-color: transparent;
+      transition: all 0.2s ease;
+    }
+    
+    .btn-outline:hover {
+      background-color: var(--primary);
+      color: white;
+    }
+    
     .card {
       transition: all 0.3s ease;
       border: 1px solid #E5E7EB;
@@ -79,40 +91,71 @@
       background-color: var(--primary);
     }
     
-    .edit-mode {
-      border: 2px dashed var(--secondary);
-      background-color: rgba(0, 198, 0, 0.05);
+    /* Estilos específicos para la sección de estrategia */
+    .estrategia-card {
+      border-left: 4px solid var(--primary);
     }
     
-    .update-highlight {
-      animation: highlightUpdate 2s ease-in-out;
+    /* Estilos específicos para la sección institucional */
+    .institucional-card {
+      border-left: 4px solid var(--secondary);
     }
     
-    @keyframes highlightUpdate {
-      0% { background-color: rgba(0, 198, 0, 0.1); }
-      50% { background-color: rgba(0, 198, 0, 0.3); }
-      100% { background-color: transparent; }
+    /* Estilos para futuras secciones */
+    .vetaflat-card {
+      border-left: 4px solid #9333EA;
     }
     
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.25rem 0.75rem;
-      border-radius: 9999px;
-      font-size: 0.75rem;
+    .financiamiento-card {
+      border-left: 4px solid #F59E0B;
+    }
+    
+    /* Estilos para las pestañas de cuentas */
+    .account-tab {
+      cursor: pointer;
+      padding: 0.75rem 1rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border-bottom: 2px solid transparent;
+    }
+    
+    .account-tab:hover {
+      color: var(--secondary);
+    }
+    
+    .account-tab.active {
+      color: var(--secondary);
+      border-bottom-color: var(--secondary);
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
     }
     
-    .badge-admin {
-      background-color: #FEF3C7;
-      color: #92400E;
+    .account-content {
+      display: none;
     }
     
-    .badge-comercial {
-      background-color: #DBEAFE;
-      color: #1E40AF;
+    .account-content.active {
+      display: block;
+    }
+    
+    .account-detail {
+      display: flex;
+      border-bottom: 1px solid #E5E7EB;
+      padding: 0.75rem 0;
+    }
+    
+    .account-detail:last-child {
+      border-bottom: none;
+    }
+    
+    .account-label {
+      width: 40%;
+      font-weight: 500;
+      color: #4B5563;
+    }
+    
+    .account-value {
+      width: 60%;
+      color: #111827;
     }
   </style>
 </head>
@@ -161,7 +204,6 @@
             <div class="flex items-center">
               <span class="text-gray-600 mr-2">Bienvenido/a</span>
               <span class="font-medium text-gray-800" id="nombre-usuario">Usuario</span>
-              <span class="ml-2" id="badge-container"></span>
             </div>
             <button onclick="cerrarSesion()" class="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium transition">
               Cerrar sesión
@@ -170,77 +212,28 @@
         </div>
         
         <!-- Navigation -->
-        <nav class="flex px-4">
-          <a href="#" class="nav-link active" onclick="cambiarSeccion('estrategia'); return false;" id="nav-estrategia">
+        <nav class="flex px-4 overflow-x-auto whitespace-nowrap" id="main-nav">
+          <a href="#" class="nav-link active" data-section="estrategia" id="nav-estrategia">
             Estrategia
           </a>
-          <a href="#" class="nav-link" onclick="cambiarSeccion('institucional'); return false;" id="nav-institucional">
+          <a href="#" class="nav-link" data-section="institucional" id="nav-institucional">
             Institucional
           </a>
+          <!-- Espacio para futuras secciones -->
+          <!-- <a href="#" class="nav-link" data-section="vetaflat" id="nav-vetaflat">
+            VetaFlat
+          </a>
+          <a href="#" class="nav-link" data-section="financiamiento" id="nav-financiamiento">
+            Financiamiento
+          </a> -->
         </nav>
       </div>
     </header>
     
-    <!-- Content Sections -->
+    <!-- Content Sections Container -->
     <main class="flex-grow bg-white">
-      <div class="max-w-7xl mx-auto px-4 py-8">
-        <!-- Estrategia Section -->
-        <div id="seccion-estrategia">
-          <div class="mb-8 flex justify-between items-center">
-            <div>
-              <h1 class="text-3xl font-bold text-gray-900">Reportes Estratégicos</h1>
-              <p class="text-gray-600 mt-2">Accede a los últimos informes y análisis para la toma de decisiones.</p>
-            </div>
-            <div class="admin-only hidden">
-              <button onclick="toggleEditMode('estrategia')" class="px-4 py-2 rounded-lg btn-secondary font-medium text-white" id="btn-edit-estrategia">
-                Modo edición
-              </button>
-            </div>
-          </div>
-          
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="reportes-estrategia">
-            <!-- Los reportes se cargarán dinámicamente -->
-          </div>
-          
-          <!-- Add Report Button (Admin Only) -->
-          <div class="mt-8 text-center admin-only hidden">
-            <button onclick="agregarNuevoReporte('estrategia')" class="px-6 py-3 rounded-lg border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white inline-flex items-center transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-              </svg>
-              Agregar nuevo reporte
-            </button>
-          </div>
-        </div>
-        
-        <!-- Institucional Section -->
-        <div id="seccion-institucional" class="hidden">
-          <div class="mb-8 flex justify-between items-center">
-            <div>
-              <h1 class="text-3xl font-bold text-gray-900">Recursos Institucionales</h1>
-              <p class="text-gray-600 mt-2">Accede a documentos y recursos corporativos de Vetacap.</p>
-            </div>
-            <div class="admin-only hidden">
-              <button onclick="toggleEditMode('institucional')" class="px-4 py-2 rounded-lg btn-secondary font-medium text-white" id="btn-edit-institucional">
-                Modo edición
-              </button>
-            </div>
-          </div>
-          
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="reportes-institucional">
-            <!-- Los recursos se cargarán dinámicamente -->
-          </div>
-          
-          <!-- Add Report Button (Admin Only) -->
-          <div class="mt-8 text-center admin-only hidden">
-            <button onclick="agregarNuevoReporte('institucional')" class="px-6 py-3 rounded-lg border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white inline-flex items-center transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-              </svg>
-              Agregar nuevo recurso
-            </button>
-          </div>
-        </div>
+      <div class="max-w-7xl mx-auto px-4 py-8" id="content-container">
+        <!-- Las secciones se cargarán dinámicamente aquí -->
       </div>
     </main>
     
@@ -259,179 +252,95 @@
     </footer>
   </div>
   
-  <!-- Modal para editar reporte -->
-  <div id="modal-editar-reporte" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-    <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-      <div class="flex justify-between items-center mb-6">
-        <h3 class="text-xl font-semibold text-gray-900">Editar Reporte</h3>
-        <button onclick="cerrarModal('modal-editar-reporte')" class="text-gray-400 hover:text-gray-600">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-      
-      <div class="space-y-4">
-        <input type="hidden" id="reporte-id" value="">
-        
-        <div>
-          <label for="reporte-titulo" class="block text-sm font-medium text-gray-700 mb-1">Título</label>
-          <input type="text" id="reporte-titulo" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="Título del reporte" />
-        </div>
-        
-        <div>
-          <label for="reporte-descripcion" class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
-          <textarea id="reporte-descripcion" rows="3" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="Descripción del reporte"></textarea>
-        </div>
-        
-        <div>
-          <label for="reporte-fecha" class="block text-sm font-medium text-gray-700 mb-1">Fecha de actualización</label>
-          <input type="text" id="reporte-fecha" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="DD/MM/AAAA" />
-        </div>
-        
-        <div>
-          <label for="reporte-url" class="block text-sm font-medium text-gray-700 mb-1">URL del documento</label>
-          <input type="text" id="reporte-url" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="https://..." />
-        </div>
-        
-        <div>
-          <label for="reporte-boton" class="block text-sm font-medium text-gray-700 mb-1">Texto del botón</label>
-          <input type="text" id="reporte-boton" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="Ver reporte" />
-        </div>
-      </div>
-      
-      <div class="mt-6 flex space-x-3">
-        <button onclick="guardarReporte()" class="flex-1 py-3 rounded-lg btn-primary font-medium text-white">
-          Guardar cambios
-        </button>
-        <button onclick="cerrarModal('modal-editar-reporte')" class="flex-1 py-3 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium transition">
-          Cancelar
-        </button>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Modal para nuevo reporte -->
-  <div id="modal-nuevo-reporte" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-    <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-      <div class="flex justify-between items-center mb-6">
-        <h3 class="text-xl font-semibold text-gray-900">Nuevo Reporte</h3>
-        <button onclick="cerrarModal('modal-nuevo-reporte')" class="text-gray-400 hover:text-gray-600">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-      
-      <div class="space-y-4">
-        <input type="hidden" id="nuevo-reporte-seccion" value="">
-        
-        <div>
-          <label for="nuevo-reporte-titulo" class="block text-sm font-medium text-gray-700 mb-1">Título</label>
-          <input type="text" id="nuevo-reporte-titulo" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="Título del reporte" />
-        </div>
-        
-        <div>
-          <label for="nuevo-reporte-descripcion" class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
-          <textarea id="nuevo-reporte-descripcion" rows="3" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="Descripción del reporte"></textarea>
-        </div>
-        
-        <div>
-          <label for="nuevo-reporte-fecha" class="block text-sm font-medium text-gray-700 mb-1">Fecha de actualización</label>
-          <input type="text" id="nuevo-reporte-fecha" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="DD/MM/AAAA" />
-        </div>
-        
-        <div>
-          <label for="nuevo-reporte-url" class="block text-sm font-medium text-gray-700 mb-1">URL del documento</label>
-          <input type="text" id="nuevo-reporte-url" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="https://..." />
-        </div>
-        
-        <div>
-          <label for="nuevo-reporte-boton" class="block text-sm font-medium text-gray-700 mb-1">Texto del botón</label>
-          <input type="text" id="nuevo-reporte-boton" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="Ver reporte" />
-        </div>
-      </div>
-      
-      <div class="mt-6 flex space-x-3">
-        <button onclick="guardarNuevoReporte()" class="flex-1 py-3 rounded-lg btn-primary font-medium text-white">
-          Guardar
-        </button>
-        <button onclick="cerrarModal('modal-nuevo-reporte')" class="flex-1 py-3 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium transition">
-          Cancelar
-        </button>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Modal para configurar GitHub -->
-  <div id="modal-github-config" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-    <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-      <div class="flex justify-between items-center mb-6">
-        <h3 class="text-xl font-semibold text-gray-900">Configuración de GitHub</h3>
-        <button onclick="cerrarModal('modal-github-config')" class="text-gray-400 hover:text-gray-600">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-      
-      <div class="space-y-4">
-        <div>
-          <label for="github-token" class="block text-sm font-medium text-gray-700 mb-1">Token de acceso personal</label>
-          <input type="password" id="github-token" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="ghp_xxxxxxxxxxxxxxxx" />
-          <p class="text-xs text-gray-500 mt-1">Crea un token en GitHub → Settings → Developer settings → Personal access tokens</p>
-        </div>
-        
-        <div>
-          <label for="github-owner" class="block text-sm font-medium text-gray-700 mb-1">Usuario/Organización</label>
-          <input type="text" id="github-owner" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="tu-usuario-de-github" />
-        </div>
-        
-        <div>
-          <label for="github-repo" class="block text-sm font-medium text-gray-700 mb-1">Nombre del repositorio</label>
-          <input type="text" id="github-repo" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="nombre-del-repositorio" />
-        </div>
-      </div>
-      
-      <div class="mt-6 flex space-x-3">
-        <button onclick="guardarConfiguracionGitHub()" class="flex-1 py-3 rounded-lg btn-primary font-medium text-white">
-          Guardar configuración
-        </button>
-        <button onclick="cerrarModal('modal-github-config')" class="flex-1 py-3 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium transition">
-          Cancelar
-        </button>
-      </div>
-    </div>
-  </div>
-  
   <!-- Toast de notificación -->
   <div id="toast" class="fixed bottom-4 right-4 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-10 opacity-0 transition-all duration-300 flex items-center z-50">
     <span id="toast-message">Cambios guardados correctamente</span>
   </div>
 
   <script>
-    // Configuración de GitHub
-    const GITHUB_CONFIG = {
-      token: '',
-      owner: '',
-      repo: '',
-      path: 'data/reportes.json'
+    // Datos de usuario (solo comercial)
+    const usuario = { 
+      id: 1, 
+      username: "comercial", 
+      nombre: "Equipo Comercial", 
+      password: "vetacap2024", 
+      rol: "comercial", 
+      ultimoAcceso: "10/05/2023" 
     };
     
-    // Datos de usuarios
-    const usuarios = [
-      { id: 1, username: "admin", nombre: "Administrador", password: "admin2024", rol: "admin", ultimoAcceso: "15/05/2023" },
-      { id: 2, username: "comercial", nombre: "Equipo Comercial", password: "vetacap2024", rol: "comercial", ultimoAcceso: "10/05/2023" }
-    ];
+    // Configuración de secciones
+    const SECCIONES = {
+      estrategia: {
+        titulo: "Reportes Estratégicos",
+        descripcion: "Accede a los últimos informes y análisis para la toma de decisiones.",
+        icono: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>`,
+        color: "bg-primary"
+      },
+      institucional: {
+        titulo: "Recursos Institucionales",
+        descripcion: "Accede a documentos y recursos corporativos de Vetacap.",
+        icono: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>`,
+        color: "bg-secondary"
+      },
+      // Espacio para futuras secciones
+      vetaflat: {
+        titulo: "VetaFlat",
+        descripcion: "Plataforma de inversión inmobiliaria.",
+        icono: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>`,
+        color: "bg-purple-600"
+      },
+      financiamiento: {
+        titulo: "Financiamiento",
+        descripcion: "Soluciones de financiamiento para empresas.",
+        icono: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>`,
+        color: "bg-yellow-500"
+      }
+    };
+    
+    // Datos de cuentas de fondeo
+    const CUENTAS_FONDEO = {
+      "pesos": {
+        titulo: "VETA CAPITAL SA - PESOS",
+        cuit: "30-71582830-4",
+        tipo: "CUENTA CORRIENTE",
+        cbu: "364733",
+        alias: ""
+      },
+      "usd": {
+        titulo: "VETA CAPITAL SA - USD",
+        cuit: "30-71582830-4",
+        tipo: "CUENTA DE AHORRO",
+        cbu: "364803",
+        alias: "VETA.CAPITAL.USD"
+      },
+      "acydi-pesos": {
+        titulo: "ACYDI PESOS - VETA CAPITAL S.A.",
+        cuit: "30-71582830-4",
+        tipo: "CUENTA CORRIENTE PESOS",
+        cbu: "384315",
+        alias: "VETA.FONDOS.PESOS"
+      },
+      "acydi-usd": {
+        titulo: "VETA CAPITAL SA - USD (ACYDI)",
+        cuit: "30-71582830-4",
+        tipo: "CUENTA DE AHORRO",
+        cbu: "384485",
+        alias: ""
+      }
+    };
     
     // Variables globales
     let reportes = {};
     let usuarioActual = null;
-    let editMode = {
-      estrategia: false,
-      institucional: false
-    };
-    let githubFileSha = null; // Para guardar el SHA del archivo en GitHub
+    let seccionActual = "estrategia";
     
     // Función para inicializar la aplicación
     async function inicializar() {
@@ -445,196 +354,130 @@
         }
       }
       
-      // Cargar configuración de GitHub desde localStorage
-      const githubConfig = localStorage.getItem("vetacap_github_config");
-      if (githubConfig) {
-        Object.assign(GITHUB_CONFIG, JSON.parse(githubConfig));
-      }
+      // Configurar eventos de navegación
+      configurarNavegacion();
       
-      // Cargar datos desde GitHub o localStorage
-      await cargarDatos();
+      // Inicializar datos de reportes
+      inicializarDatosPorDefecto();
     }
     
-    // Función para cargar datos (desde GitHub o localStorage)
-    async function cargarDatos() {
-      if (GITHUB_CONFIG.token && GITHUB_CONFIG.owner && GITHUB_CONFIG.repo) {
-        await cargarDatosDesdeGitHub();
-      } else {
-        cargarDatosLocales();
-      }
-    }
-    
-    // Función para cargar datos desde GitHub
-    async function cargarDatosDesdeGitHub() {
-      try {
-        const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`;
-        const response = await fetch(url, {
-          headers: {
-            'Authorization': `token ${GITHUB_CONFIG.token}`,
-            'Accept': 'application/vnd.github.v3+json'
-          }
+    // Configurar eventos de navegación
+    function configurarNavegacion() {
+      const navLinks = document.querySelectorAll("#main-nav .nav-link");
+      navLinks.forEach(link => {
+        link.addEventListener("click", function(e) {
+          e.preventDefault();
+          const seccion = this.getAttribute("data-section");
+          cambiarSeccion(seccion);
         });
-        
-        if (response.ok) {
-          const data = await response.json();
-          githubFileSha = data.sha; // Guardar el SHA para futuras actualizaciones
-          
-          // Decodificar el contenido en base64
-          const content = atob(data.content);
-          reportes = JSON.parse(content);
-          
-          // Actualizar la interfaz si el usuario está logueado
-          if (usuarioActual) {
-            cargarReportes("estrategia");
-            cargarReportes("institucional");
-          }
-          
-          console.log('Datos cargados desde GitHub');
-          return true;
-        } else if (response.status === 404) {
-          console.log('El archivo no existe en GitHub, se creará uno nuevo');
-          inicializarDatosPorDefecto();
-          await guardarDatosEnGitHub();
-          return true;
-        } else {
-          console.error('Error al cargar datos desde GitHub:', response.statusText);
-          cargarDatosLocales();
-          return false;
-        }
-      } catch (error) {
-        console.error('Error al cargar datos desde GitHub:', error);
-        cargarDatosLocales();
-        return false;
-      }
-    }
-    
-    // Función para guardar datos en GitHub
-    async function guardarDatosEnGitHub() {
-      if (!GITHUB_CONFIG.token || !GITHUB_CONFIG.owner || !GITHUB_CONFIG.repo) {
-        console.log('Configuración de GitHub incompleta');
-        localStorage.setItem("vetacap_reportes", JSON.stringify(reportes));
-        return false;
-      }
-      
-      try {
-        const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`;
-        
-        // Convertir los datos a base64
-        const content = btoa(unescape(encodeURIComponent(JSON.stringify(reportes, null, 2))));
-        
-        const body = {
-          message: 'Actualización de reportes desde el portal',
-          content: content
-        };
-        
-        // Si tenemos el SHA, lo incluimos para actualizar el archivo existente
-        if (githubFileSha) {
-          body.sha = githubFileSha;
-        }
-        
-        const response = await fetch(url, {
-          method: 'PUT',
-          headers: {
-            'Authorization': `token ${GITHUB_CONFIG.token}`,
-            'Content-Type': 'application/json',
-            'Accept': 'application/vnd.github.v3+json'
-          },
-          body: JSON.stringify(body)
-        });
-        
-        if (response.ok) {
-          const data = await response.json();
-          githubFileSha = data.content.sha; // Actualizar el SHA para futuras operaciones
-          console.log('Datos guardados en GitHub');
-          return true;
-        } else {
-          console.error('Error al guardar en GitHub:', response.statusText);
-          localStorage.setItem("vetacap_reportes", JSON.stringify(reportes));
-          return false;
-        }
-      } catch (error) {
-        console.error('Error al guardar en GitHub:', error);
-        localStorage.setItem("vetacap_reportes", JSON.stringify(reportes));
-        return false;
-      }
-    }
-    
-    // Función para cargar datos desde localStorage (fallback)
-    function cargarDatosLocales() {
-      const reportesGuardados = localStorage.getItem("vetacap_reportes");
-      if (reportesGuardados) {
-        reportes = JSON.parse(reportesGuardados);
-        console.log('Datos cargados desde localStorage');
-      } else {
-        inicializarDatosPorDefecto();
-      }
-      
-      // Actualizar la interfaz si el usuario está logueado
-      if (usuarioActual) {
-        cargarReportes("estrategia");
-        cargarReportes("institucional");
-      }
+      });
     }
     
     // Función para inicializar datos por defecto
     function inicializarDatosPorDefecto() {
       reportes = {
-        "reporte-comercial": {
-          id: "reporte-comercial",
+        "reporte-semanal-mesa": {
+          id: "reporte-semanal-mesa",
           seccion: "estrategia",
-          titulo: "Reporte Comercial",
-          descripcion: "Análisis detallado de ventas, clientes y oportunidades de negocio para optimizar la estrategia comercial.",
-          fecha: "15/05/2023",
-          url: "https://drive.google.com/file/d/1eNSEh-LZUUbjRhNwmrT_-sR7lswAk2og/view?usp=sharing",
-          textoBoton: "Ver reporte"
+          titulo: "Reporte Semanal Mesa",
+          descripcion: "",
+          fecha: new Date().toLocaleDateString(),
+          url: "reportes/Reporte Semanal Mesa.pdf",
+          textoBoton: "Ver reporte",
+          ultimaActualizacion: new Date().toISOString()
         },
         "gestion-liquidez": {
           id: "gestion-liquidez",
           seccion: "estrategia",
           titulo: "Gestión de Liquidez",
-          descripcion: "Análisis de flujos de efectivo y posiciones de liquidez para optimizar la gestión financiera.",
-          fecha: "10/05/2023",
-          url: "https://drive.google.com/file/d/1Z2wWJ4p9h6aY7Pp6Iv0UDdo04nRD0o6i/view?usp=sharing",
-          textoBoton: "Ver reporte"
+          descripcion: "Curva de pesos y breakevens",
+          fecha: new Date().toLocaleDateString(),
+          url: "reportes/Gestion_de_Liquidez.pdf",
+          textoBoton: "Ver reporte",
+          ultimaActualizacion: new Date().toISOString()
         },
         "cobertura-cambiaria": {
           id: "cobertura-cambiaria",
           seccion: "estrategia",
           titulo: "Cobertura Cambiaria",
-          descripcion: "Estrategias de cobertura y análisis de riesgo cambiario para proteger las operaciones de la volatilidad.",
-          fecha: "05/05/2023",
-          url: "https://drive.google.com/file/d/1QcFUyBWdX5E9sWFbxuW4qufIFGGm_eDy/view?usp=sharing",
-          textoBoton: "Ver reporte"
+          descripcion: "Estrategias de cobertura cambiaria",
+          fecha: new Date().toLocaleDateString(),
+          url: "reportes/Cobertura_Cambiaria.pdf",
+          textoBoton: "Ver reporte",
+          ultimaActualizacion: new Date().toISOString()
+        },
+        "datos-cuenta": {
+          id: "datos-cuenta",
+          seccion: "institucional",
+          titulo: "Datos de Cuentas de Fondeo",
+          descripcion: "",
+          fecha: "",
+          url: "#",
+          textoBoton: "Consultar datos",
+          ultimaActualizacion: "",
+          customRender: true,
+          orden: 1
         },
         "presentacion-institucional": {
           id: "presentacion-institucional",
           seccion: "institucional",
           titulo: "Presentación Institucional",
-          descripcion: "Presentación corporativa de Vetacap para clientes y socios estratégicos.",
-          fecha: "20/04/2023",
+          descripcion: "",
+          fecha: "",
           url: "#",
-          textoBoton: "Descargar PPT"
-        },
-        "datos-cuenta": {
-          id: "datos-cuenta",
-          seccion: "institucional",
-          titulo: "Datos de Cuenta de Fondeo",
-          descripcion: "Información de cuentas bancarias para operaciones de fondeo y transferencias.",
-          fecha: "15/04/2023",
-          url: "#",
-          textoBoton: "Consultar datos"
+          textoBoton: "Descargar PPT",
+          ultimaActualizacion: "",
+          orden: 2
         },
         "formularios-apertura": {
           id: "formularios-apertura",
           seccion: "institucional",
           titulo: "Formularios de Apertura",
-          descripcion: "Documentos necesarios para la apertura de cuentas de clientes.",
-          fecha: "10/04/2023",
+          descripcion: "",
+          fecha: "",
           url: "#",
-          textoBoton: "Descargar formularios"
+          textoBoton: "Descargar formularios",
+          ultimaActualizacion: "",
+          orden: 3
         }
       };
-      console.log('Datos inicializados por defecto');
+      
+      // Verificar si los archivos existen y actualizar las fechas
+      verificarArchivosYActualizarFechas();
+      
+      // Guardar en localStorage como respaldo
+      localStorage.setItem("vetacap_reportes", JSON.stringify(reportes));
+    }
+    
+    // Función para verificar archivos y actualizar fechas
+    async function verificarArchivosYActualizarFechas() {
+      // Para cada reporte en la sección estrategia, verificar si el archivo existe
+      const reportesEstrategia = Object.values(reportes).filter(r => r.seccion === "estrategia");
+      
+      for (const reporte of reportesEstrategia) {
+        try {
+          const response = await fetch(reporte.url, { method: 'HEAD' });
+          if (response.ok) {
+            // Obtener la fecha de última modificación del archivo
+            const lastModified = response.headers.get('Last-Modified');
+            if (lastModified) {
+              const fechaModificacion = new Date(lastModified);
+              reporte.ultimaActualizacion = fechaModificacion.toISOString();
+              reporte.fecha = fechaModificacion.toLocaleDateString();
+            }
+          }
+        } catch (error) {
+          console.log(`No se pudo verificar el archivo ${reporte.url}:`, error);
+        }
+      }
+      
+      // Actualizar localStorage
+      localStorage.setItem("vetacap_reportes", JSON.stringify(reportes));
+      
+      // Actualizar la interfaz si el usuario está logueado
+      if (usuarioActual) {
+        renderizarSeccionActual();
+      }
     }
     
     // Autenticación
@@ -643,9 +486,7 @@
       const pass = document.getElementById("clave").value;
       const error = document.getElementById("error-msg");
       
-      const usuario = usuarios.find(u => u.username === user && u.password === pass);
-      
-      if (usuario) {
+      if (user === usuario.username && pass === usuario.password) {
         usuarioActual = usuario;
         const hoy = new Date().toISOString().split('T')[0];
         localStorage.setItem("vetacap_logeado", "true");
@@ -665,43 +506,11 @@
       document.getElementById("login-box").classList.add("hidden");
       document.getElementById("contenido").classList.remove("hidden");
       
-      // Mostrar nombre de usuario y badge de rol
+      // Mostrar nombre de usuario
       document.getElementById("nombre-usuario").textContent = usuarioActual.nombre;
       
-      const badgeContainer = document.getElementById("badge-container");
-      let badgeClass = "";
-      let badgeText = "";
-      
-      switch(usuarioActual.rol) {
-        case "admin":
-          badgeClass = "badge-admin";
-          badgeText = "Administrador";
-          break;
-        case "comercial":
-          badgeClass = "badge-comercial";
-          badgeText = "Comercial";
-          break;
-      }
-      
-      badgeContainer.innerHTML = `<span class="badge ${badgeClass}">${badgeText}</span>`;
-      
-      // Mostrar/ocultar elementos según el rol
-      const adminElements = document.querySelectorAll(".admin-only");
-      
-      adminElements.forEach(el => {
-        if (usuarioActual.rol === "admin") {
-          el.classList.remove("hidden");
-        } else {
-          el.classList.add("hidden");
-        }
-      });
-      
-      // Añadir botón de configuración de GitHub para administradores
-      agregarBotonConfiguracionGitHub();
-      
-      // Cargar reportes
-      cargarReportes("estrategia");
-      cargarReportes("institucional");
+      // Renderizar la sección actual
+      renderizarSeccionActual();
     }
     
     function cerrarSesion() {
@@ -721,351 +530,284 @@
     }
     
     function cambiarSeccion(seccion) {
-      // Ocultar todas las secciones
-      document.getElementById("seccion-estrategia").classList.add("hidden");
-      document.getElementById("seccion-institucional").classList.add("hidden");
-      
-      // Mostrar la sección seleccionada
-      document.getElementById(`seccion-${seccion}`).classList.remove("hidden");
-      
       // Actualizar navegación
-      document.getElementById("nav-estrategia").classList.remove("active");
-      document.getElementById("nav-institucional").classList.remove("active");
-      
+      document.querySelectorAll("#main-nav .nav-link").forEach(link => {
+        link.classList.remove("active");
+      });
       document.getElementById(`nav-${seccion}`).classList.add("active");
       
-      // Desactivar modo edición si está activo
-      if (editMode.estrategia) {
-        toggleEditMode("estrategia");
-      }
-      if (editMode.institucional) {
-        toggleEditMode("institucional");
-      }
+      // Actualizar sección actual
+      seccionActual = seccion;
+      
+      // Renderizar la sección
+      renderizarSeccionActual();
     }
     
-    function cargarReportes(seccion) {
-      const contenedor = document.getElementById(`reportes-${seccion}`);
-      contenedor.innerHTML = "";
+    function renderizarSeccionActual() {
+      const contenedor = document.getElementById("content-container");
+      const seccion = SECCIONES[seccionActual];
+      
+      // Crear el HTML de la sección
+      let html = `
+        <div class="mb-8">
+          <h1 class="text-3xl font-bold text-gray-900">${seccion.titulo}</h1>
+          <p class="text-gray-600 mt-2">${seccion.descripcion}</p>
+        </div>
+      `;
       
       // Filtrar reportes por sección
-      const reportesSeccion = Object.values(reportes).filter(reporte => reporte.seccion === seccion);
+      let reportesSeccion = Object.values(reportes).filter(reporte => reporte.seccion === seccionActual);
       
-      reportesSeccion.forEach(reporte => {
-        const reporteHTML = crearHTMLReporte(reporte);
-        contenedor.innerHTML += reporteHTML;
-      });
+      // Si estamos en la sección institucional, ordenar los elementos
+      if (seccionActual === "institucional") {
+        reportesSeccion.sort((a, b) => (a.orden || 999) - (b.orden || 999));
+      }
+      
+      // Si no hay reportes, mostrar mensaje
+      if (reportesSeccion.length === 0) {
+        html += `
+          <div class="text-center py-10">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <p class="text-gray-500 text-lg">No hay reportes disponibles en esta sección.</p>
+          </div>
+        `;
+      } else {
+        // Iniciar el grid para la sección
+        html += `<div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="reportes-${seccionActual}">`;
+        
+        // Agregar cada reporte
+        reportesSeccion.forEach(reporte => {
+          if (reporte.customRender && reporte.id === "datos-cuenta") {
+            html += crearHTMLCuentasFondeo();
+          } else {
+            html += crearHTMLReporte(reporte);
+          }
+        });
+        
+        html += `</div>`;
+      }
+      
+      // Actualizar el contenido
+      contenedor.innerHTML = html;
+      
+      // Configurar eventos para las pestañas de cuentas de fondeo
+      if (seccionActual === "institucional") {
+        configurarPestañasCuentas();
+        configurarBotonesCopiar();
+      }
     }
     
     function crearHTMLReporte(reporte) {
-      const iconoColor = reporte.seccion === "estrategia" ? "bg-primary" : "bg-secondary";
-      const iconoSVG = reporte.seccion === "estrategia" ? 
-        `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-        </svg>` : 
-        `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>`;
+      const seccion = SECCIONES[reporte.seccion];
+      const cardClass = `${reporte.seccion}-card`;
       
-      return `
-        <div class="card bg-white rounded-lg overflow-hidden shadow" data-id="${reporte.id}">
+      // Crear HTML del reporte
+      let html = `
+        <div class="card bg-white rounded-lg overflow-hidden shadow ${cardClass}" data-id="${reporte.id}">
           <div class="p-6">
             <div class="flex items-center mb-4">
-              <div class="w-10 h-10 rounded-full ${iconoColor} flex items-center justify-center mr-3">
-                ${iconoSVG}
+              <div class="w-10 h-10 rounded-full ${seccion.color} flex items-center justify-center mr-3">
+                ${seccion.icono}
               </div>
               <h3 class="text-xl font-semibold text-gray-900">${reporte.titulo}</h3>
             </div>
-            
-            <p class="text-gray-600 mb-4">${reporte.descripcion}</p>
-            
+      `;
+      
+      // Agregar descripción solo si existe y no es sección institucional
+      if (reporte.descripcion && seccionActual !== "institucional") {
+        html += `<p class="text-gray-600 mb-4">${reporte.descripcion}</p>`;
+      }
+      
+      // Agregar fecha solo si existe y no es sección institucional
+      if (reporte.fecha && seccionActual !== "institucional") {
+        html += `
             <div class="flex items-center text-sm text-gray-500 mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
               <span>Actualizado: ${reporte.fecha}</span>
             </div>
-            
+        `;
+      }
+      
+      html += `
             <div class="flex justify-between items-center">
               <a href="${reporte.url}" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-lg text-sm font-medium text-center">
                 ${reporte.textoBoton}
               </a>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      return html;
+    }
+    
+    function crearHTMLCuentasFondeo() {
+      const seccion = SECCIONES.institucional;
+      
+      let html = `
+        <div class="card bg-white rounded-lg overflow-hidden shadow institucional-card col-span-3" data-id="datos-cuenta">
+          <div class="p-6">
+            <div class="flex items-center mb-4">
+              <div class="w-10 h-10 rounded-full ${seccion.color} flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900">Datos de Cuentas de Fondeo</h3>
+            </div>
+            
+            <div class="mb-6">
+              <div class="flex border-b border-gray-200 overflow-x-auto">
+                <div class="account-tab active" data-tab="pesos">PESOS</div>
+                <div class="account-tab" data-tab="usd">USD</div>
+                <div class="account-tab" data-tab="acydi-pesos">ACYDI PESOS</div>
+                <div class="account-tab" data-tab="acydi-usd">ACYDI USD</div>
+              </div>
               
-              <div class="editor-controls hidden">
-                <button onclick="editarReporte('${reporte.id}')" class="p-2 text-blue-500 hover:text-blue-700">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                  </svg>
-                </button>
-                <button onclick="eliminarReporte('${reporte.id}')" class="p-2 text-red-500 hover:text-red-700">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
-                </button>
+              <div class="py-4">
+      `;
+      
+      // Crear contenido para cada pestaña
+      Object.keys(CUENTAS_FONDEO).forEach(key => {
+        const cuenta = CUENTAS_FONDEO[key];
+        const isActive = key === "pesos" ? "active" : "";
+        
+        html += `
+          <div class="account-content ${isActive}" id="tab-${key}">
+            <div class="bg-gray-50 p-4 rounded-lg">
+              <div class="account-detail">
+                <div class="account-label">Nombre:</div>
+                <div class="account-value">${cuenta.titulo}</div>
+              </div>
+              <div class="account-detail">
+                <div class="account-label">CUIT:</div>
+                <div class="account-value">${cuenta.cuit}</div>
+              </div>
+              <div class="account-detail">
+                <div class="account-label">Tipo:</div>
+                <div class="account-value">${cuenta.tipo}</div>
+              </div>
+              <div class="account-detail">
+                <div class="account-label">CBU:</div>
+                <div class="account-value">${cuenta.cbu}</div>
+              </div>
+        `;
+        
+        // Mostrar alias solo si existe
+        if (cuenta.alias) {
+          html += `
+              <div class="account-detail">
+                <div class="account-label">Alias:</div>
+                <div class="account-value">${cuenta.alias}</div>
+              </div>
+          `;
+        }
+        
+        html += `
+            </div>
+            <div class="mt-4 flex space-x-2">
+              <button class="btn-outline flex-1 py-2 rounded-lg text-sm font-medium flex items-center justify-center copy-btn" data-copy="${key}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                </svg>
+                Copiar CBU
+              </button>
+              <button class="btn-outline flex-1 py-2 rounded-lg text-sm font-medium flex items-center justify-center copy-all-btn" data-copy="${key}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                Copiar todo
+              </button>
+            </div>
+          </div>
+        `;
+      });
+      
+      html += `
               </div>
             </div>
           </div>
         </div>
       `;
+      
+      return html;
     }
     
-    function toggleEditMode(seccion) {
-      editMode[seccion] = !editMode[seccion];
+    function configurarPestañasCuentas() {
+      const tabs = document.querySelectorAll('.account-tab');
+      if (tabs.length === 0) return;
       
-      const btn = document.getElementById(`btn-edit-${seccion}`);
-      const reportesElements = document.querySelectorAll(`#reportes-${seccion} .card`);
-      
-      if (editMode[seccion]) {
-        btn.textContent = "Guardar cambios";
-        btn.classList.remove("btn-secondary");
-        btn.classList.add("bg-blue-500", "hover:bg-blue-600");
-        
-        reportesElements.forEach(reporte => {
-          reporte.classList.add("edit-mode");
-          const controls = reporte.querySelector(".editor-controls");
-          if (controls) controls.classList.remove("hidden");
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          // Desactivar todas las pestañas
+          document.querySelectorAll('.account-tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.account-content').forEach(c => c.classList.remove('active'));
+          
+          // Activar la pestaña seleccionada
+          this.classList.add('active');
+          const tabId = this.getAttribute('data-tab');
+          document.getElementById(`tab-${tabId}`).classList.add('active');
         });
-      } else {
-        btn.textContent = "Modo edición";
-        btn.classList.add("btn-secondary");
-        btn.classList.remove("bg-blue-500", "hover:bg-blue-600");
-        
-        reportesElements.forEach(reporte => {
-          reporte.classList.remove("edit-mode");
-          const controls = reporte.querySelector(".editor-controls");
-          if (controls) controls.classList.add("hidden");
-        });
-        
-        // Guardar cambios en GitHub o localStorage
-        guardarDatos().then(exito => {
-          // Mostrar notificación
-          mostrarNotificacion(exito ? 
-            "Cambios guardados correctamente" : 
-            "Cambios guardados localmente (error de conexión con GitHub)"
-          );
-        });
-      }
-    }
-    
-    // Función para guardar datos (en GitHub o localStorage)
-    async function guardarDatos() {
-      if (GITHUB_CONFIG.token && GITHUB_CONFIG.owner && GITHUB_CONFIG.repo) {
-        return await guardarDatosEnGitHub();
-      } else {
-        localStorage.setItem("vetacap_reportes", JSON.stringify(reportes));
-        return true;
-      }
-    }
-    
-    function editarReporte(id) {
-      const reporte = reportes[id];
-      if (!reporte) return;
-      
-      document.getElementById("reporte-id").value = reporte.id;
-      document.getElementById("reporte-titulo").value = reporte.titulo;
-      document.getElementById("reporte-descripcion").value = reporte.descripcion;
-      document.getElementById("reporte-fecha").value = reporte.fecha;
-      document.getElementById("reporte-url").value = reporte.url;
-      document.getElementById("reporte-boton").value = reporte.textoBoton;
-      
-      abrirModal("modal-editar-reporte");
-    }
-    
-    function guardarReporte() {
-      const id = document.getElementById("reporte-id").value;
-      const reporte = reportes[id];
-      
-      if (!reporte) return;
-      
-      reporte.titulo = document.getElementById("reporte-titulo").value;
-      reporte.descripcion = document.getElementById("reporte-descripcion").value;
-      reporte.fecha = document.getElementById("reporte-fecha").value;
-      reporte.url = document.getElementById("reporte-url").value;
-      reporte.textoBoton = document.getElementById("reporte-boton").value;
-      
-      // Actualizar la vista
-      cargarReportes(reporte.seccion);
-      
-      // Guardar en GitHub o localStorage
-      guardarDatos().then(exito => {
-        // Cerrar modal y mostrar notificación
-        cerrarModal("modal-editar-reporte");
-        mostrarNotificacion(exito ? 
-          "Reporte actualizado correctamente" : 
-          "Reporte guardado localmente (error de conexión con GitHub)"
-        );
-        
-        // Resaltar el reporte actualizado
-        setTimeout(() => {
-          const reporteElement = document.querySelector(`[data-id="${id}"]`);
-          if (reporteElement) {
-            reporteElement.classList.add("update-highlight");
-            setTimeout(() => {
-              reporteElement.classList.remove("update-highlight");
-            }, 2000);
-          }
-        }, 300);
       });
     }
     
-    function eliminarReporte(id) {
-      const reporte = reportes[id];
-      if (!reporte) return;
-      
-      const seccion = reporte.seccion;
-      
-      // Confirmar eliminación
-      if (confirm(`¿Estás seguro de que deseas eliminar el reporte "${reporte.titulo}"?`)) {
-        // Eliminar el reporte
-        delete reportes[id];
-        
-        // Actualizar la vista
-        cargarReportes(seccion);
-        
-        // Guardar en GitHub o localStorage
-        guardarDatos().then(exito => {
-          // Mostrar notificación
-          mostrarNotificacion(exito ? 
-            "Reporte eliminado correctamente" : 
-            "Reporte eliminado localmente (error de conexión con GitHub)"
-          );
+    function configurarBotonesCopiar() {
+      // Botones para copiar solo CBU
+      const botonesCopiar = document.querySelectorAll('.copy-btn');
+      botonesCopiar.forEach(boton => {
+        boton.addEventListener('click', function() {
+          const cuentaId = this.getAttribute('data-copy');
+          const cuenta = CUENTAS_FONDEO[cuentaId];
+          
+          if (!cuenta) return;
+          
+          // Copiar solo el CBU
+          copiarAlPortapapeles(cuenta.cbu, "CBU copiado al portapapeles");
         });
-      }
-    }
-    
-    function agregarNuevoReporte(seccion) {
-      document.getElementById("nuevo-reporte-seccion").value = seccion;
-      document.getElementById("nuevo-reporte-titulo").value = "";
-      document.getElementById("nuevo-reporte-descripcion").value = "";
-      document.getElementById("nuevo-reporte-fecha").value = new Date().toLocaleDateString();
-      document.getElementById("nuevo-reporte-url").value = "";
-      document.getElementById("nuevo-reporte-boton").value = "Ver reporte";
+      });
       
-      abrirModal("modal-nuevo-reporte");
-    }
-    
-    function guardarNuevoReporte() {
-      const seccion = document.getElementById("nuevo-reporte-seccion").value;
-      const titulo = document.getElementById("nuevo-reporte-titulo").value;
-      const descripcion = document.getElementById("nuevo-reporte-descripcion").value;
-      const fecha = document.getElementById("nuevo-reporte-fecha").value;
-      const url = document.getElementById("nuevo-reporte-url").value;
-      const textoBoton = document.getElementById("nuevo-reporte-boton").value;
-      
-      if (!titulo || !descripcion) {
-        mostrarNotificacion("Por favor completa los campos requeridos", "error");
-        return;
-      }
-      
-      // Generar ID único
-      const id = "reporte-" + Date.now();
-      
-      // Crear nuevo reporte
-      reportes[id] = {
-        id,
-        seccion,
-        titulo,
-        descripcion,
-        fecha,
-        url,
-        textoBoton
-      };
-      
-      // Actualizar la vista
-      cargarReportes(seccion);
-      
-      // Guardar en GitHub o localStorage
-      guardarDatos().then(exito => {
-        // Cerrar modal y mostrar notificación
-        cerrarModal("modal-nuevo-reporte");
-        mostrarNotificacion(exito ? 
-          "Reporte creado correctamente" : 
-          "Reporte guardado localmente (error de conexión con GitHub)"
-        );
-        
-        // Resaltar el nuevo reporte
-        setTimeout(() => {
-          const reporteElement = document.querySelector(`[data-id="${id}"]`);
-          if (reporteElement) {
-            reporteElement.classList.add("update-highlight");
-            setTimeout(() => {
-              reporteElement.classList.remove("update-highlight");
-            }, 2000);
+      // Botones para copiar todos los datos
+      const botonesCopiarTodo = document.querySelectorAll('.copy-all-btn');
+      botonesCopiarTodo.forEach(boton => {
+        boton.addEventListener('click', function() {
+          const cuentaId = this.getAttribute('data-copy');
+          const cuenta = CUENTAS_FONDEO[cuentaId];
+          
+          if (!cuenta) return;
+          
+          // Crear texto para copiar todos los datos
+          let textoCopiar = `${cuenta.titulo}\n`;
+          textoCopiar += `CUIT: ${cuenta.cuit}\n`;
+          textoCopiar += `Tipo: ${cuenta.tipo}\n`;
+          textoCopiar += `CBU: ${cuenta.cbu}\n`;
+          
+          if (cuenta.alias) {
+            textoCopiar += `Alias: ${cuenta.alias}\n`;
           }
-        }, 300);
+          
+          copiarAlPortapapeles(textoCopiar, "Todos los datos copiados al portapapeles");
+        });
       });
     }
     
-    // Función para añadir botón de configuración de GitHub
-    function agregarBotonConfiguracionGitHub() {
-      if (usuarioActual && usuarioActual.rol === "admin") {
-        const headerControls = document.querySelector("header .flex.items-center.space-x-4");
-        
-        // Verificar si ya existe el botón
-        const existingBtn = document.getElementById("github-config-btn");
-        if (existingBtn) return;
-        
-        if (headerControls) {
-          // Crear botón de configuración
-          const configBtn = document.createElement("button");
-          configBtn.id = "github-config-btn";
-          configBtn.className = "px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium transition flex items-center";
-          configBtn.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 24 24" fill="currentColor">
-              <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
-            </svg>
-            GitHub
-          `;
-          configBtn.onclick = () => abrirModal("modal-github-config");
-          
-          // Insertar antes del botón de cerrar sesión
-          headerControls.insertBefore(configBtn, headerControls.lastElementChild);
-          
-          // Llenar los campos del modal con la configuración actual
-          document.getElementById("github-token").value = GITHUB_CONFIG.token || '';
-          document.getElementById("github-owner").value = GITHUB_CONFIG.owner || '';
-          document.getElementById("github-repo").value = GITHUB_CONFIG.repo || '';
-        }
-      }
-    }
-    
-    // Función para guardar la configuración de GitHub
-    async function guardarConfiguracionGitHub() {
-      const token = document.getElementById("github-token").value;
-      const owner = document.getElementById("github-owner").value;
-      const repo = document.getElementById("github-repo").value;
+    function copiarAlPortapapeles(texto, mensaje) {
+      // Crear un elemento temporal para copiar
+      const el = document.createElement('textarea');
+      el.value = texto;
+      el.setAttribute('readonly', '');
+      el.style.position = 'absolute';
+      el.style.left = '-9999px';
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
       
-      if (!token || !owner || !repo) {
-        mostrarNotificacion("Por favor completa todos los campos de configuración", "error");
-        return;
-      }
-      
-      // Actualizar configuración
-      GITHUB_CONFIG.token = token;
-      GITHUB_CONFIG.owner = owner;
-      GITHUB_CONFIG.repo = repo;
-      
-      // Guardar en localStorage
-      localStorage.setItem("vetacap_github_config", JSON.stringify(GITHUB_CONFIG));
-      
-      // Cerrar modal
-      cerrarModal("modal-github-config");
-      
-      // Intentar cargar datos desde GitHub
-      const exito = await cargarDatosDesdeGitHub();
-      
-      if (exito) {
-        mostrarNotificacion("Configuración de GitHub guardada correctamente");
-      } else {
-        mostrarNotificacion("Error al conectar con GitHub. Verifica tu configuración.", "error");
-      }
-    }
-    
-    function abrirModal(id) {
-      document.getElementById(id).classList.remove("hidden");
-    }
-    
-    function cerrarModal(id) {
-      document.getElementById(id).classList.add("hidden");
+      // Mostrar notificación
+      mostrarNotificacion(mensaje);
     }
     
     function mostrarNotificacion(mensaje, tipo = "success") {
@@ -1089,8 +831,53 @@
       }, 3000);
     }
     
+    // Función para actualizar la fecha de un reporte cuando se actualiza el documento
+    function actualizarFechaReporte(id) {
+      if (reportes[id]) {
+        const ahora = new Date();
+        reportes[id].fecha = ahora.toLocaleDateString();
+        reportes[id].ultimaActualizacion = ahora.toISOString();
+        
+        // Guardar en localStorage
+        localStorage.setItem("vetacap_reportes", JSON.stringify(reportes));
+        
+        // Actualizar la interfaz si el usuario está logueado
+        if (usuarioActual) {
+          renderizarSeccionActual();
+        }
+      }
+    }
+    
+    // Función para añadir una nueva sección al portal
+    function agregarNuevaSeccion(id, titulo, descripcion, icono, color) {
+      // Añadir a la configuración de secciones
+      SECCIONES[id] = {
+        titulo: titulo,
+        descripcion: descripcion,
+        icono: icono,
+        color: color
+      };
+      
+      // Crear enlace de navegación
+      const nav = document.getElementById("main-nav");
+      const enlace = document.createElement("a");
+      enlace.href = "#";
+      enlace.className = "nav-link";
+      enlace.setAttribute("data-section", id);
+      enlace.id = `nav-${id}`;
+      enlace.textContent = titulo;
+      enlace.addEventListener("click", function(e) {
+        e.preventDefault();
+        cambiarSeccion(id);
+      });
+      
+      nav.appendChild(enlace);
+      
+      console.log(`Nueva sección "${titulo}" añadida al portal`);
+    }
+    
     // Inicializar la aplicación cuando se carga la página
     document.addEventListener("DOMContentLoaded", inicializar);
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93f4093cb2d0d7c1',t:'MTc0NzE1OTAyNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93f461a42649d7c1',t:'MTc0NzE2MjY0NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
