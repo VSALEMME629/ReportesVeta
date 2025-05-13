@@ -12,24 +12,88 @@
       --secondary: #00C600;
       --dark-blue: #021751;
     }
-
+    
     body {
       font-family: 'Albert Sans', sans-serif;
       background-color: #FFFFFF;
     }
-
+    
     .btn-primary {
       background-color: var(--primary);
       color: white;
       transition: all 0.2s ease;
     }
-
+    
     .btn-primary:hover {
       background-color: var(--dark-blue);
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(16, 54, 226, 0.2);
     }
-
+    
+    .btn-secondary {
+      background-color: var(--secondary);
+      color: white;
+      transition: all 0.2s ease;
+    }
+    
+    .btn-secondary:hover {
+      background-color: #00a000;
+      transform: translateY(-2px);
+    }
+    
+    .card {
+      transition: all 0.3s ease;
+      border: 1px solid #E5E7EB;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    }
+    
+    .nav-link {
+      position: relative;
+      padding: 1rem 0;
+      margin: 0 1rem;
+      color: #4B5563;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--primary);
+    }
+    
+    .nav-link.active {
+      color: var(--primary);
+      font-weight: 600;
+    }
+    
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--primary);
+    }
+    
+    .edit-mode {
+      border: 2px dashed var(--secondary);
+      background-color: rgba(0, 198, 0, 0.05);
+    }
+    
+    .update-highlight {
+      animation: highlightUpdate 2s ease-in-out;
+    }
+    
+    @keyframes highlightUpdate {
+      0% { background-color: rgba(0, 198, 0, 0.1); }
+      50% { background-color: rgba(0, 198, 0, 0.3); }
+      100% { background-color: transparent; }
+    }
+    
     .badge {
       display: inline-flex;
       align-items: center;
@@ -40,15 +104,15 @@
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
-
+    
     .badge-admin {
       background-color: #FEF3C7;
       color: #92400E;
     }
-
-    .badge-viewer {
-      background-color: #E0E7FF;
-      color: #3730A3;
+    
+    .badge-comercial {
+      background-color: #DBEAFE;
+      color: #1E40AF;
     }
   </style>
 </head>
@@ -57,20 +121,26 @@
   <div class="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-white to-gray-100" id="login-box">
     <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
       <div class="text-center mb-8">
-        <img src="./assets/VetaCap_Brandpack_Positivo-RGB.png" alt="Vetacap Logo" class="w-48 mx-auto mb-6">
+        <img src="assets/VetaCap_Brandpack_Positivo-RGB.png" alt="Vetacap Logo" class="w-48 mx-auto mb-6">
         <h2 class="text-2xl font-bold text-gray-800">Portal Interno</h2>
         <p class="text-gray-500 mt-2">Ingresa tus credenciales para acceder</p>
       </div>
+      
       <div class="space-y-5">
         <div>
           <label for="usuario" class="block text-sm font-medium text-gray-700 mb-1">Usuario</label>
-          <input type="text" id="usuario" class="w-full px-4 py-3 rounded-lg border border-gray-300" placeholder="Ingresa tu usuario" />
+          <input type="text" id="usuario" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="Ingresa tu usuario" />
         </div>
+        
         <div>
           <label for="clave" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
-          <input type="password" id="clave" class="w-full px-4 py-3 rounded-lg border border-gray-300" placeholder="Ingresa tu contraseña" />
+          <input type="password" id="clave" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="Ingresa tu contraseña" />
         </div>
-        <button onclick="validar()" class="w-full py-3 rounded-lg btn-primary font-semibold text-white">Ingresar</button>
+        
+        <button onclick="validar()" class="w-full py-3 rounded-lg btn-primary font-semibold text-white focus:outline-none">
+          Ingresar
+        </button>
+        
         <div class="text-red-500 text-sm text-center" id="error-msg"></div>
       </div>
     </div>
@@ -78,43 +148,335 @@
 
   <!-- Main Content Section -->
   <div class="hidden flex flex-col min-h-screen" id="contenido">
+    <!-- Header -->
     <header class="bg-white shadow-sm">
       <div class="max-w-7xl mx-auto">
+        <!-- Top Header -->
         <div class="flex justify-between items-center px-4 py-4 border-b border-gray-200">
-          <img src="./assets/VetaCap_Brandpack_Positivo-RGB.png" alt="Vetacap Logo" class="h-8">
+          <div>
+            <img src="assets/VetaCap_Brandpack_Positivo-RGB.png" alt="Vetacap Logo" class="h-10">
+          </div>
+          
           <div class="flex items-center space-x-4">
-            <span class="text-gray-600">Bienvenido/a</span>
-            <span class="font-medium text-gray-800" id="nombre-usuario"></span>
-            <span id="badge-container"></span>
-            <button onclick="cerrarSesion()" class="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium">Cerrar sesión</button>
+            <div class="flex items-center">
+              <span class="text-gray-600 mr-2">Bienvenido/a</span>
+              <span class="font-medium text-gray-800" id="nombre-usuario">Usuario</span>
+              <span class="ml-2" id="badge-container"></span>
+            </div>
+            <button onclick="cerrarSesion()" class="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium transition">
+              Cerrar sesión
+            </button>
+          </div>
+        </div>
+        
+        <!-- Navigation -->
+        <nav class="flex px-4">
+          <a href="#" class="nav-link active" onclick="cambiarSeccion('estrategia'); return false;" id="nav-estrategia">
+            Estrategia
+          </a>
+          <a href="#" class="nav-link" onclick="cambiarSeccion('institucional'); return false;" id="nav-institucional">
+            Institucional
+          </a>
+        </nav>
+      </div>
+    </header>
+    
+    <!-- Content Sections -->
+    <main class="flex-grow bg-white">
+      <div class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Estrategia Section -->
+        <div id="seccion-estrategia">
+          <div class="mb-8 flex justify-between items-center">
+            <div>
+              <h1 class="text-3xl font-bold text-gray-900">Reportes Estratégicos</h1>
+              <p class="text-gray-600 mt-2">Accede a los últimos informes y análisis para la toma de decisiones.</p>
+            </div>
+            <div class="admin-only hidden">
+              <button onclick="toggleEditMode('estrategia')" class="px-4 py-2 rounded-lg btn-secondary font-medium text-white" id="btn-edit-estrategia">
+                Modo edición
+              </button>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="reportes-estrategia">
+            <!-- Los reportes se cargarán dinámicamente -->
+          </div>
+          
+          <!-- Add Report Button (Admin Only) -->
+          <div class="mt-8 text-center admin-only hidden">
+            <button onclick="agregarNuevoReporte('estrategia')" class="px-6 py-3 rounded-lg border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white inline-flex items-center transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
+              Agregar nuevo reporte
+            </button>
+          </div>
+        </div>
+        
+        <!-- Institucional Section -->
+        <div id="seccion-institucional" class="hidden">
+          <div class="mb-8 flex justify-between items-center">
+            <div>
+              <h1 class="text-3xl font-bold text-gray-900">Recursos Institucionales</h1>
+              <p class="text-gray-600 mt-2">Accede a documentos y recursos corporativos de Vetacap.</p>
+            </div>
+            <div class="admin-only hidden">
+              <button onclick="toggleEditMode('institucional')" class="px-4 py-2 rounded-lg btn-secondary font-medium text-white" id="btn-edit-institucional">
+                Modo edición
+              </button>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="reportes-institucional">
+            <!-- Los recursos se cargarán dinámicamente -->
+          </div>
+          
+          <!-- Add Report Button (Admin Only) -->
+          <div class="mt-8 text-center admin-only hidden">
+            <button onclick="agregarNuevoReporte('institucional')" class="px-6 py-3 rounded-lg border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white inline-flex items-center transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
+              Agregar nuevo recurso
+            </button>
           </div>
         </div>
       </div>
-    </header>
-    <main class="flex-grow bg-white flex items-center justify-center">
-      <h1 class="text-2xl font-semibold text-gray-700">Contenido del Portal Interno Vetacap</h1>
     </main>
+    
+    <!-- Footer -->
+    <footer class="bg-dark-blue text-white py-6 mt-auto">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="mb-4 md:mb-0">
+            <img src="assets/VetaCap_Brandpack_Positivo-RGB.png" alt="Vetacap Logo" class="h-8 brightness-0 invert">
+          </div>
+          <div class="text-sm text-gray-300">
+            © 2023 Vetacap. Todos los derechos reservados.
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  
+  <!-- Modal para editar reporte -->
+  <div id="modal-editar-reporte" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-xl font-semibold text-gray-900">Editar Reporte</h3>
+        <button onclick="cerrarModal('modal-editar-reporte')" class="text-gray-400 hover:text-gray-600">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      
+      <div class="space-y-4">
+        <input type="hidden" id="reporte-id" value="">
+        
+        <div>
+          <label for="reporte-titulo" class="block text-sm font-medium text-gray-700 mb-1">Título</label>
+          <input type="text" id="reporte-titulo" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="Título del reporte" />
+        </div>
+        
+        <div>
+          <label for="reporte-descripcion" class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
+          <textarea id="reporte-descripcion" rows="3" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="Descripción del reporte"></textarea>
+        </div>
+        
+        <div>
+          <label for="reporte-fecha" class="block text-sm font-medium text-gray-700 mb-1">Fecha de actualización</label>
+          <input type="text" id="reporte-fecha" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="DD/MM/AAAA" />
+        </div>
+        
+        <div>
+          <label for="reporte-url" class="block text-sm font-medium text-gray-700 mb-1">URL del documento</label>
+          <input type="text" id="reporte-url" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="https://..." />
+        </div>
+        
+        <div>
+          <label for="reporte-boton" class="block text-sm font-medium text-gray-700 mb-1">Texto del botón</label>
+          <input type="text" id="reporte-boton" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="Ver reporte" />
+        </div>
+      </div>
+      
+      <div class="mt-6 flex space-x-3">
+        <button onclick="guardarReporte()" class="flex-1 py-3 rounded-lg btn-primary font-medium text-white">
+          Guardar cambios
+        </button>
+        <button onclick="cerrarModal('modal-editar-reporte')" class="flex-1 py-3 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium transition">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal para nuevo reporte -->
+  <div id="modal-nuevo-reporte" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-xl font-semibold text-gray-900">Nuevo Reporte</h3>
+        <button onclick="cerrarModal('modal-nuevo-reporte')" class="text-gray-400 hover:text-gray-600">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      
+      <div class="space-y-4">
+        <input type="hidden" id="nuevo-reporte-seccion" value="">
+        
+        <div>
+          <label for="nuevo-reporte-titulo" class="block text-sm font-medium text-gray-700 mb-1">Título</label>
+          <input type="text" id="nuevo-reporte-titulo" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="Título del reporte" />
+        </div>
+        
+        <div>
+          <label for="nuevo-reporte-descripcion" class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
+          <textarea id="nuevo-reporte-descripcion" rows="3" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="Descripción del reporte"></textarea>
+        </div>
+        
+        <div>
+          <label for="nuevo-reporte-fecha" class="block text-sm font-medium text-gray-700 mb-1">Fecha de actualización</label>
+          <input type="text" id="nuevo-reporte-fecha" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="DD/MM/AAAA" />
+        </div>
+        
+        <div>
+          <label for="nuevo-reporte-url" class="block text-sm font-medium text-gray-700 mb-1">URL del documento</label>
+          <input type="text" id="nuevo-reporte-url" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="https://..." />
+        </div>
+        
+        <div>
+          <label for="nuevo-reporte-boton" class="block text-sm font-medium text-gray-700 mb-1">Texto del botón</label>
+          <input type="text" id="nuevo-reporte-boton" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="Ver reporte" />
+        </div>
+      </div>
+      
+      <div class="mt-6 flex space-x-3">
+        <button onclick="guardarNuevoReporte()" class="flex-1 py-3 rounded-lg btn-primary font-medium text-white">
+          Guardar
+        </button>
+        <button onclick="cerrarModal('modal-nuevo-reporte')" class="flex-1 py-3 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium transition">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Toast de notificación -->
+  <div id="toast" class="fixed bottom-4 right-4 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-10 opacity-0 transition-all duration-300 flex items-center z-50">
+    <span id="toast-message">Cambios guardados correctamente</span>
   </div>
 
   <script>
+    // Datos de usuarios
     const usuarios = [
       { id: 1, username: "admin", nombre: "Administrador", password: "admin2024", rol: "admin", ultimoAcceso: "15/05/2023" },
-      { id: 2, username: "comercial", nombre: "Equipo Comercial", password: "vetacap2024", rol: "viewer", ultimoAcceso: "10/05/2023" }
+      { id: 2, username: "comercial", nombre: "Equipo Comercial", password: "vetacap2024", rol: "comercial", ultimoAcceso: "10/05/2023" }
     ];
-
+    
+    // Datos de reportes
+    let reportes = {
+      "reporte-comercial": {
+        id: "reporte-comercial",
+        seccion: "estrategia",
+        titulo: "Reporte Comercial",
+        descripcion: "Análisis detallado de ventas, clientes y oportunidades de negocio para optimizar la estrategia comercial.",
+        fecha: "15/05/2023",
+        url: "https://drive.google.com/file/d/1eNSEh-LZUUbjRhNwmrT_-sR7lswAk2og/view?usp=sharing",
+        textoBoton: "Ver reporte"
+      },
+      "gestion-liquidez": {
+        id: "gestion-liquidez",
+        seccion: "estrategia",
+        titulo: "Gestión de Liquidez",
+        descripcion: "Análisis de flujos de efectivo y posiciones de liquidez para optimizar la gestión financiera.",
+        fecha: "10/05/2023",
+        url: "https://drive.google.com/file/d/1Z2wWJ4p9h6aY7Pp6Iv0UDdo04nRD0o6i/view?usp=sharing",
+        textoBoton: "Ver reporte"
+      },
+      "cobertura-cambiaria": {
+        id: "cobertura-cambiaria",
+        seccion: "estrategia",
+        titulo: "Cobertura Cambiaria",
+        descripcion: "Estrategias de cobertura y análisis de riesgo cambiario para proteger las operaciones de la volatilidad.",
+        fecha: "05/05/2023",
+        url: "https://drive.google.com/file/d/1QcFUyBWdX5E9sWFbxuW4qufIFGGm_eDy/view?usp=sharing",
+        textoBoton: "Ver reporte"
+      },
+      "presentacion-institucional": {
+        id: "presentacion-institucional",
+        seccion: "institucional",
+        titulo: "Presentación Institucional",
+        descripcion: "Presentación corporativa de Vetacap para clientes y socios estratégicos.",
+        fecha: "20/04/2023",
+        url: "#",
+        textoBoton: "Descargar PPT"
+      },
+      "datos-cuenta": {
+        id: "datos-cuenta",
+        seccion: "institucional",
+        titulo: "Datos de Cuenta de Fondeo",
+        descripcion: "Información de cuentas bancarias para operaciones de fondeo y transferencias.",
+        fecha: "15/04/2023",
+        url: "#",
+        textoBoton: "Consultar datos"
+      },
+      "formularios-apertura": {
+        id: "formularios-apertura",
+        seccion: "institucional",
+        titulo: "Formularios de Apertura",
+        descripcion: "Documentos necesarios para la apertura de cuentas de clientes.",
+        fecha: "10/04/2023",
+        url: "#",
+        textoBoton: "Descargar formularios"
+      }
+    };
+    
+    // Variables globales
     let usuarioActual = null;
-
+    let editMode = {
+      estrategia: false,
+      institucional: false
+    };
+    
+    // Función para inicializar la aplicación
+    function inicializar() {
+      // Comprobar si hay una sesión guardada
+      const logeado = localStorage.getItem("vetacap_logeado");
+      if (logeado === "true") {
+        const usuarioGuardado = localStorage.getItem("vetacap_usuario");
+        if (usuarioGuardado) {
+          usuarioActual = JSON.parse(usuarioGuardado);
+          mostrarContenido();
+        }
+      }
+      
+      // Cargar reportes desde localStorage si existen
+      const reportesGuardados = localStorage.getItem("vetacap_reportes");
+      if (reportesGuardados) {
+        reportes = JSON.parse(reportesGuardados);
+      }
+    }
+    
+    // Autenticación
     function validar() {
       const user = document.getElementById("usuario").value;
       const pass = document.getElementById("clave").value;
       const error = document.getElementById("error-msg");
-
+      
       const usuario = usuarios.find(u => u.username === user && u.password === pass);
-
+      
       if (usuario) {
         usuarioActual = usuario;
+        const hoy = new Date().toISOString().split('T')[0];
         localStorage.setItem("vetacap_logeado", "true");
         localStorage.setItem("vetacap_usuario", JSON.stringify(usuario));
+        localStorage.setItem("vetacap_fecha", hoy);
+        
+        // Actualizar último acceso
+        usuario.ultimoAcceso = new Date().toLocaleDateString();
+        
         mostrarContenido();
       } else {
         error.textContent = "Usuario o contraseña incorrectos.";
@@ -124,39 +486,340 @@
     function mostrarContenido() {
       document.getElementById("login-box").classList.add("hidden");
       document.getElementById("contenido").classList.remove("hidden");
-
+      
+      // Mostrar nombre de usuario y badge de rol
       document.getElementById("nombre-usuario").textContent = usuarioActual.nombre;
+      
       const badgeContainer = document.getElementById("badge-container");
-
-      const badge = document.createElement("span");
-      badge.classList.add("badge");
-
-      if (usuarioActual.rol === "admin") {
-        badge.classList.add("badge-admin");
-        badge.textContent = "Administrador";
-      } else {
-        badge.classList.add("badge-viewer");
-        badge.textContent = "Visualizador";
+      let badgeClass = "";
+      let badgeText = "";
+      
+      switch(usuarioActual.rol) {
+        case "admin":
+          badgeClass = "badge-admin";
+          badgeText = "Administrador";
+          break;
+        case "comercial":
+          badgeClass = "badge-comercial";
+          badgeText = "Comercial";
+          break;
       }
-
-      badgeContainer.innerHTML = "";
-      badgeContainer.appendChild(badge);
+      
+      badgeContainer.innerHTML = `<span class="badge ${badgeClass}">${badgeText}</span>`;
+      
+      // Mostrar/ocultar elementos según el rol
+      const adminElements = document.querySelectorAll(".admin-only");
+      
+      adminElements.forEach(el => {
+        if (usuarioActual.rol === "admin") {
+          el.classList.remove("hidden");
+        } else {
+          el.classList.add("hidden");
+        }
+      });
+      
+      // Cargar reportes
+      cargarReportes("estrategia");
+      cargarReportes("institucional");
     }
-
+    
     function cerrarSesion() {
       localStorage.removeItem("vetacap_logeado");
       localStorage.removeItem("vetacap_usuario");
-      location.reload();
+      localStorage.removeItem("vetacap_fecha");
+      
+      document.getElementById("contenido").classList.add("hidden");
+      document.getElementById("login-box").classList.remove("hidden");
+      
+      // Limpiar campos de login
+      document.getElementById("usuario").value = "";
+      document.getElementById("clave").value = "";
+      document.getElementById("error-msg").textContent = "";
+      
+      usuarioActual = null;
     }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const logeado = localStorage.getItem("vetacap_logeado") === "true";
-      const usuario = localStorage.getItem("vetacap_usuario");
-      if (logeado && usuario) {
-        usuarioActual = JSON.parse(usuario);
-        mostrarContenido();
+    
+    function cambiarSeccion(seccion) {
+      // Ocultar todas las secciones
+      document.getElementById("seccion-estrategia").classList.add("hidden");
+      document.getElementById("seccion-institucional").classList.add("hidden");
+      
+      // Mostrar la sección seleccionada
+      document.getElementById(`seccion-${seccion}`).classList.remove("hidden");
+      
+      // Actualizar navegación
+      document.getElementById("nav-estrategia").classList.remove("active");
+      document.getElementById("nav-institucional").classList.remove("active");
+      
+      document.getElementById(`nav-${seccion}`).classList.add("active");
+      
+      // Desactivar modo edición si está activo
+      if (editMode.estrategia) {
+        toggleEditMode("estrategia");
       }
-    });
+      if (editMode.institucional) {
+        toggleEditMode("institucional");
+      }
+    }
+    
+    function cargarReportes(seccion) {
+      const contenedor = document.getElementById(`reportes-${seccion}`);
+      contenedor.innerHTML = "";
+      
+      // Filtrar reportes por sección
+      const reportesSeccion = Object.values(reportes).filter(reporte => reporte.seccion === seccion);
+      
+      reportesSeccion.forEach(reporte => {
+        const reporteHTML = crearHTMLReporte(reporte);
+        contenedor.innerHTML += reporteHTML;
+      });
+    }
+    
+    function crearHTMLReporte(reporte) {
+      const iconoColor = reporte.seccion === "estrategia" ? "bg-primary" : "bg-secondary";
+      const iconoSVG = reporte.seccion === "estrategia" ? 
+        `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>` : 
+        `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>`;
+      
+      return `
+        <div class="card bg-white rounded-lg overflow-hidden shadow" data-id="${reporte.id}">
+          <div class="p-6">
+            <div class="flex items-center mb-4">
+              <div class="w-10 h-10 rounded-full ${iconoColor} flex items-center justify-center mr-3">
+                ${iconoSVG}
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900">${reporte.titulo}</h3>
+            </div>
+            
+            <p class="text-gray-600 mb-4">${reporte.descripcion}</p>
+            
+            <div class="flex items-center text-sm text-gray-500 mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span>Actualizado: ${reporte.fecha}</span>
+            </div>
+            
+            <div class="flex justify-between items-center">
+              <a href="${reporte.url}" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-lg text-sm font-medium text-center">
+                ${reporte.textoBoton}
+              </a>
+              
+              <div class="editor-controls hidden">
+                <button onclick="editarReporte('${reporte.id}')" class="p-2 text-blue-500 hover:text-blue-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                  </svg>
+                </button>
+                <button onclick="eliminarReporte('${reporte.id}')" class="p-2 text-red-500 hover:text-red-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    
+    function toggleEditMode(seccion) {
+      editMode[seccion] = !editMode[seccion];
+      
+      const btn = document.getElementById(`btn-edit-${seccion}`);
+      const reportes = document.querySelectorAll(`#reportes-${seccion} .card`);
+      
+      if (editMode[seccion]) {
+        btn.textContent = "Guardar cambios";
+        btn.classList.remove("btn-secondary");
+        btn.classList.add("bg-blue-500", "hover:bg-blue-600");
+        
+        reportes.forEach(reporte => {
+          reporte.classList.add("edit-mode");
+          const controls = reporte.querySelector(".editor-controls");
+          if (controls) controls.classList.remove("hidden");
+        });
+      } else {
+        btn.textContent = "Modo edición";
+        btn.classList.add("btn-secondary");
+        btn.classList.remove("bg-blue-500", "hover:bg-blue-600");
+        
+        reportes.forEach(reporte => {
+          reporte.classList.remove("edit-mode");
+          const controls = reporte.querySelector(".editor-controls");
+          if (controls) controls.classList.add("hidden");
+        });
+        
+        // Guardar cambios en localStorage
+        localStorage.setItem("vetacap_reportes", JSON.stringify(reportes));
+        
+        // Mostrar notificación
+        mostrarNotificacion("Cambios guardados correctamente");
+      }
+    }
+    
+    function editarReporte(id) {
+      const reporte = reportes[id];
+      if (!reporte) return;
+      
+      document.getElementById("reporte-id").value = reporte.id;
+      document.getElementById("reporte-titulo").value = reporte.titulo;
+      document.getElementById("reporte-descripcion").value = reporte.descripcion;
+      document.getElementById("reporte-fecha").value = reporte.fecha;
+      document.getElementById("reporte-url").value = reporte.url;
+      document.getElementById("reporte-boton").value = reporte.textoBoton;
+      
+      abrirModal("modal-editar-reporte");
+    }
+    
+    function guardarReporte() {
+      const id = document.getElementById("reporte-id").value;
+      const reporte = reportes[id];
+      
+      if (!reporte) return;
+      
+      reporte.titulo = document.getElementById("reporte-titulo").value;
+      reporte.descripcion = document.getElementById("reporte-descripcion").value;
+      reporte.fecha = document.getElementById("reporte-fecha").value;
+      reporte.url = document.getElementById("reporte-url").value;
+      reporte.textoBoton = document.getElementById("reporte-boton").value;
+      
+      // Actualizar la vista
+      cargarReportes(reporte.seccion);
+      
+      // Guardar en localStorage
+      localStorage.setItem("vetacap_reportes", JSON.stringify(reportes));
+      
+      // Cerrar modal y mostrar notificación
+      cerrarModal("modal-editar-reporte");
+      mostrarNotificacion("Reporte actualizado correctamente");
+      
+      // Resaltar el reporte actualizado
+      setTimeout(() => {
+        const reporteElement = document.querySelector(`[data-id="${id}"]`);
+        if (reporteElement) {
+          reporteElement.classList.add("update-highlight");
+          setTimeout(() => {
+            reporteElement.classList.remove("update-highlight");
+          }, 2000);
+        }
+      }, 300);
+    }
+    
+    function eliminarReporte(id) {
+      const reporte = reportes[id];
+      if (!reporte) return;
+      
+      const seccion = reporte.seccion;
+      
+      // Eliminar el reporte
+      delete reportes[id];
+      
+      // Actualizar la vista
+      cargarReportes(seccion);
+      
+      // Guardar en localStorage
+      localStorage.setItem("vetacap_reportes", JSON.stringify(reportes));
+      
+      // Mostrar notificación
+      mostrarNotificacion("Reporte eliminado correctamente");
+    }
+    
+    function agregarNuevoReporte(seccion) {
+      document.getElementById("nuevo-reporte-seccion").value = seccion;
+      document.getElementById("nuevo-reporte-titulo").value = "";
+      document.getElementById("nuevo-reporte-descripcion").value = "";
+      document.getElementById("nuevo-reporte-fecha").value = new Date().toLocaleDateString();
+      document.getElementById("nuevo-reporte-url").value = "";
+      document.getElementById("nuevo-reporte-boton").value = "Ver reporte";
+      
+      abrirModal("modal-nuevo-reporte");
+    }
+    
+    function guardarNuevoReporte() {
+      const seccion = document.getElementById("nuevo-reporte-seccion").value;
+      const titulo = document.getElementById("nuevo-reporte-titulo").value;
+      const descripcion = document.getElementById("nuevo-reporte-descripcion").value;
+      const fecha = document.getElementById("nuevo-reporte-fecha").value;
+      const url = document.getElementById("nuevo-reporte-url").value;
+      const textoBoton = document.getElementById("nuevo-reporte-boton").value;
+      
+      if (!titulo || !descripcion) {
+        mostrarNotificacion("Por favor completa los campos requeridos", "error");
+        return;
+      }
+      
+      // Generar ID único
+      const id = "reporte-" + Date.now();
+      
+      // Crear nuevo reporte
+      reportes[id] = {
+        id,
+        seccion,
+        titulo,
+        descripcion,
+        fecha,
+        url,
+        textoBoton
+      };
+      
+      // Actualizar la vista
+      cargarReportes(seccion);
+      
+      // Guardar en localStorage
+      localStorage.setItem("vetacap_reportes", JSON.stringify(reportes));
+      
+      // Cerrar modal y mostrar notificación
+      cerrarModal("modal-nuevo-reporte");
+      mostrarNotificacion("Reporte creado correctamente");
+      
+      // Resaltar el nuevo reporte
+      setTimeout(() => {
+        const reporteElement = document.querySelector(`[data-id="${id}"]`);
+        if (reporteElement) {
+          reporteElement.classList.add("update-highlight");
+          setTimeout(() => {
+            reporteElement.classList.remove("update-highlight");
+          }, 2000);
+        }
+      }, 300);
+    }
+    
+    function abrirModal(id) {
+      document.getElementById(id).classList.remove("hidden");
+    }
+    
+    function cerrarModal(id) {
+      document.getElementById(id).classList.add("hidden");
+    }
+    
+    function mostrarNotificacion(mensaje, tipo = "success") {
+      const toast = document.getElementById("toast");
+      const toastMessage = document.getElementById("toast-message");
+      
+      toastMessage.textContent = mensaje;
+      
+      if (tipo === "error") {
+        toast.classList.add("bg-red-600");
+        toast.classList.remove("bg-gray-800");
+      } else {
+        toast.classList.add("bg-gray-800");
+        toast.classList.remove("bg-red-600");
+      }
+      
+      toast.classList.remove("translate-y-10", "opacity-0");
+      
+      setTimeout(() => {
+        toast.classList.add("translate-y-10", "opacity-0");
+      }, 3000);
+    }
+    
+    // Inicializar la aplicación cuando se carga la página
+    document.addEventListener("DOMContentLoaded", inicializar);
   </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93f3965ff35a0ec6',t:'MTc0NzE1NDMxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
