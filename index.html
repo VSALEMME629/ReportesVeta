@@ -157,6 +157,70 @@
       width: 60%;
       color: #111827;
     }
+    
+    /* Estilos para las pestañas de formularios */
+    .form-tab {
+      cursor: pointer;
+      padding: 0.75rem 1rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border-bottom: 2px solid transparent;
+    }
+    
+    .form-tab:hover {
+      color: var(--secondary);
+    }
+    
+    .form-tab.active {
+      color: var(--secondary);
+      border-bottom-color: var(--secondary);
+      font-weight: 600;
+    }
+    
+    .form-content {
+      display: none;
+    }
+    
+    .form-content.active {
+      display: block;
+    }
+    
+    /* Mejoras visuales adicionales */
+    .copy-btn {
+      transition: all 0.3s ease;
+    }
+    
+    .copy-btn:hover {
+      transform: translateY(-2px);
+    }
+    
+    .institucional-section {
+      margin-bottom: 2rem;
+    }
+    
+    /* Estilos para la sección de estrategia */
+    .estrategia-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .estrategia-card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .estrategia-card-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .estrategia-card-footer {
+      margin-top: auto;
+      padding-top: 1rem;
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -213,11 +277,11 @@
         
         <!-- Navigation -->
         <nav class="flex px-4 overflow-x-auto whitespace-nowrap" id="main-nav">
-          <a href="#" class="nav-link active" data-section="estrategia" id="nav-estrategia">
-            Estrategia
-          </a>
           <a href="#" class="nav-link" data-section="institucional" id="nav-institucional">
             Institucional
+          </a>
+          <a href="#" class="nav-link active" data-section="estrategia" id="nav-estrategia">
+            Estrategia
           </a>
           <!-- Espacio para futuras secciones -->
           <!-- <a href="#" class="nav-link" data-section="vetaflat" id="nav-vetaflat">
@@ -307,33 +371,33 @@
     
     // Datos de cuentas de fondeo
     const CUENTAS_FONDEO = {
-      "cuenta comitente pesos": {
+      "pesos": {
         titulo: "VETA CAPITAL SA",
         cuit: "30-71582830-4",
-        tipo: "CTA CTE PESOS Nº: 3-0010000013647-3",
-        cbu: "1980001730000001364733",
+        tipo: "CTA CTE PESOS Nº:. -3",
+        cbu: "364733",
         alias: "VETA.CAPITAL.PESOS"
       },
-      "cuenta comitente usd": {
+      "usd": {
         titulo: "VETA CAPITAL SA USD",
         cuit: "30-71582830-4",
-        tipo: "CTA CTE EN USD Nº: 9-0010000013648-0",
-        cbu: "1980001790000001364803",
+        tipo: "CTA CTE EN USD Nº:. -0",
+        cbu: "364803",
         alias: "VETA.CAPITAL.USD"
       },
       "acydi-pesos": {
-        titulo: "VETA CAPITAL S.A.",
+        titulo: "ACYDI PESOS - VETA CAPITAL S.A.",
         cuit: "30-71582830-4",
-        tipo: "CTA CTE PESOS Nº: 3-0010000013843-1",
-        cbu: "1980001730000001384315",
+        tipo: "CUENTA CORRIENTE PESOS",
+        cbu: "384315",
         alias: "VETA.FONDOS.PESOS"
       },
       "acydi-usd": {
         titulo: "VETA CAPITAL SA - USD (ACYDI)",
         cuit: "30-71582830-4",
-        tipo: "CTA CTE PESOS Nº: 9-0010000013844-8",
-        cbu: "1980001790000001384485",
-        alias: "VETA.FONDOS.USD"
+        tipo: "CUENTA DE AHORRO",
+        cbu: "384485",
+        alias: ""
       }
     };
     
@@ -380,41 +444,33 @@
           id: "reporte-semanal-mesa",
           seccion: "estrategia",
           titulo: "Reporte Semanal Mesa",
-          descripcion: "",
-          fecha: new Date().toLocaleDateString(),
+          descripcion: "Análisis semanal de mercados y estrategias de inversión",
           url: "reportes/Reporte Semanal Mesa.pdf",
-          textoBoton: "Ver reporte",
-          ultimaActualizacion: new Date().toISOString()
+          textoBoton: "Ver reporte"
         },
         "gestion-liquidez": {
           id: "gestion-liquidez",
           seccion: "estrategia",
           titulo: "Gestión de Liquidez",
           descripcion: "Curva de pesos y breakevens",
-          fecha: new Date().toLocaleDateString(),
           url: "reportes/Gestion_de_Liquidez.pdf",
-          textoBoton: "Ver reporte",
-          ultimaActualizacion: new Date().toISOString()
+          textoBoton: "Ver reporte"
         },
         "cobertura-cambiaria": {
           id: "cobertura-cambiaria",
           seccion: "estrategia",
           titulo: "Cobertura Cambiaria",
           descripcion: "Estrategias de cobertura cambiaria",
-          fecha: new Date().toLocaleDateString(),
           url: "reportes/Cobertura_Cambiaria.pdf",
-          textoBoton: "Ver reporte",
-          ultimaActualizacion: new Date().toISOString()
+          textoBoton: "Ver reporte"
         },
         "presentacion-institucional": {
           id: "presentacion-institucional",
           seccion: "institucional",
           titulo: "Presentación Institucional",
           descripcion: "",
-          fecha: "",
           url: "#",
           textoBoton: "Descargar PPT",
-          ultimaActualizacion: "",
           orden: 1
         },
         "formularios-apertura": {
@@ -422,62 +478,25 @@
           seccion: "institucional",
           titulo: "Formularios de Apertura",
           descripcion: "",
-          fecha: "",
           url: "#",
-          textoBoton: "Descargar formularios",
-          ultimaActualizacion: "",
+          textoBoton: "Ver formularios",
+          customRender: true,
           orden: 2
-       },
+        },
         "datos-cuenta": {
           id: "datos-cuenta",
           seccion: "institucional",
           titulo: "Datos de Cuentas de Fondeo",
           descripcion: "",
-          fecha: "",
           url: "#",
           textoBoton: "Consultar datos",
-          ultimaActualizacion: "",
           customRender: true,
-          orden: 3     
+          orden: 3
         }
       };
       
-      // Verificar si los archivos existen y actualizar las fechas
-      verificarArchivosYActualizarFechas();
-      
       // Guardar en localStorage como respaldo
       localStorage.setItem("vetacap_reportes", JSON.stringify(reportes));
-    }
-    
-    // Función para verificar archivos y actualizar fechas
-    async function verificarArchivosYActualizarFechas() {
-      // Para cada reporte en la sección estrategia, verificar si el archivo existe
-      const reportesEstrategia = Object.values(reportes).filter(r => r.seccion === "estrategia");
-      
-      for (const reporte of reportesEstrategia) {
-        try {
-          const response = await fetch(reporte.url, { method: 'HEAD' });
-          if (response.ok) {
-            // Obtener la fecha de última modificación del archivo
-            const lastModified = response.headers.get('Last-Modified');
-            if (lastModified) {
-              const fechaModificacion = new Date(lastModified);
-              reporte.ultimaActualizacion = fechaModificacion.toISOString();
-              reporte.fecha = fechaModificacion.toLocaleDateString();
-            }
-          }
-        } catch (error) {
-          console.log(`No se pudo verificar el archivo ${reporte.url}:`, error);
-        }
-      }
-      
-      // Actualizar localStorage
-      localStorage.setItem("vetacap_reportes", JSON.stringify(reportes));
-      
-      // Actualizar la interfaz si el usuario está logueado
-      if (usuarioActual) {
-        renderizarSeccionActual();
-      }
     }
     
     // Autenticación
@@ -549,7 +568,7 @@
       
       // Crear el HTML de la sección
       let html = `
-        <div class="mb-8">
+        <div class="mb-6">
           <h1 class="text-3xl font-bold text-gray-900">${seccion.titulo}</h1>
           <p class="text-gray-600 mt-2">${seccion.descripcion}</p>
         </div>
@@ -574,15 +593,27 @@
           </div>
         `;
       } else {
-        // Iniciar el grid para la sección
-        html += `<div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="reportes-${seccionActual}">`;
+        // Iniciar el contenedor para la sección
+        if (seccionActual === "estrategia") {
+          html += `<div class="estrategia-grid" id="reportes-${seccionActual}">`;
+        } else {
+          html += `<div class="space-y-8" id="reportes-${seccionActual}">`;
+        }
         
         // Agregar cada reporte
         reportesSeccion.forEach(reporte => {
-          if (reporte.customRender && reporte.id === "datos-cuenta") {
-            html += crearHTMLCuentasFondeo();
+          if (reporte.customRender) {
+            if (reporte.id === "datos-cuenta") {
+              html += crearHTMLCuentasFondeo();
+            } else if (reporte.id === "formularios-apertura") {
+              html += crearHTMLFormulariosApertura();
+            }
           } else {
-            html += crearHTMLReporte(reporte);
+            if (seccionActual === "estrategia") {
+              html += crearHTMLReporteEstrategia(reporte);
+            } else {
+              html += crearHTMLReporte(reporte);
+            }
           }
         });
         
@@ -592,10 +623,11 @@
       // Actualizar el contenido
       contenedor.innerHTML = html;
       
-      // Configurar eventos para las pestañas de cuentas de fondeo
+      // Configurar eventos para las pestañas de cuentas de fondeo y formularios
       if (seccionActual === "institucional") {
         configurarPestañasCuentas();
         configurarBotonesCopiar();
+        configurarPestañasFormularios();
       }
     }
     
@@ -605,7 +637,7 @@
       
       // Crear HTML del reporte
       let html = `
-        <div class="card bg-white rounded-lg overflow-hidden shadow ${cardClass}" data-id="${reporte.id}">
+        <div class="card bg-white rounded-lg overflow-hidden shadow ${cardClass} institucional-section" data-id="${reporte.id}">
           <div class="p-6">
             <div class="flex items-center mb-4">
               <div class="w-10 h-10 rounded-full ${seccion.color} flex items-center justify-center mr-3">
@@ -620,21 +652,37 @@
         html += `<p class="text-gray-600 mb-4">${reporte.descripcion}</p>`;
       }
       
-      // Agregar fecha solo si existe y no es sección institucional
-      if (reporte.fecha && seccionActual !== "institucional") {
-        html += `
-            <div class="flex items-center text-sm text-gray-500 mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <span>Actualizado: ${reporte.fecha}</span>
-            </div>
-        `;
-      }
-      
       html += `
             <div class="flex justify-between items-center">
-              <a href="${reporte.url}" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-lg text-sm font-medium text-center">
+              <a href="${reporte.url}" target="_blank" class="btn-primary inline-block px-6 py-2 rounded-lg text-sm font-medium text-center">
+                ${reporte.textoBoton}
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      return html;
+    }
+    
+    function crearHTMLReporteEstrategia(reporte) {
+      const seccion = SECCIONES[reporte.seccion];
+      
+      // Crear HTML del reporte con diseño optimizado para estrategia
+      let html = `
+        <div class="card bg-white rounded-lg overflow-hidden shadow estrategia-card" data-id="${reporte.id}">
+          <div class="p-5 estrategia-card-content">
+            <div class="flex items-center mb-3">
+              <div class="w-10 h-10 rounded-full ${seccion.color} flex items-center justify-center mr-3">
+                ${seccion.icono}
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900">${reporte.titulo}</h3>
+            </div>
+            
+            <p class="text-gray-600 text-sm mb-4">${reporte.descripcion}</p>
+            
+            <div class="estrategia-card-footer">
+              <a href="${reporte.url}" target="_blank" class="btn-primary w-full inline-block px-4 py-2 rounded-lg text-sm font-medium text-center">
                 ${reporte.textoBoton}
               </a>
             </div>
@@ -649,7 +697,7 @@
       const seccion = SECCIONES.institucional;
       
       let html = `
-        <div class="card bg-white rounded-lg overflow-hidden shadow institucional-card col-span-3" data-id="datos-cuenta">
+        <div class="card bg-white rounded-lg overflow-hidden shadow institucional-card institucional-section" data-id="datos-cuenta">
           <div class="p-6">
             <div class="flex items-center mb-4">
               <div class="w-10 h-10 rounded-full ${seccion.color} flex items-center justify-center mr-3">
@@ -662,8 +710,8 @@
             
             <div class="mb-6">
               <div class="flex border-b border-gray-200 overflow-x-auto">
-                <div class="account-tab active" data-tab="cuenta comitente pesos">PESOS</div>
-                <div class="account-tab" data-tab="cuenta comitente usd">USD</div>
+                <div class="account-tab active" data-tab="pesos">PESOS</div>
+                <div class="account-tab" data-tab="usd">USD</div>
                 <div class="account-tab" data-tab="acydi-pesos">ACYDI PESOS</div>
                 <div class="account-tab" data-tab="acydi-usd">ACYDI USD</div>
               </div>
@@ -709,18 +757,12 @@
         
         html += `
             </div>
-            <div class="mt-4 flex space-x-2">
-              <button class="btn-outline flex-1 py-2 rounded-lg text-sm font-medium flex items-center justify-center copy-btn" data-copy="${key}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                </svg>
-                Copiar CBU
-              </button>
-              <button class="btn-outline flex-1 py-2 rounded-lg text-sm font-medium flex items-center justify-center copy-all-btn" data-copy="${key}">
+            <div class="mt-4 flex justify-center">
+              <button class="btn-primary py-2 px-6 rounded-lg text-sm font-medium flex items-center justify-center copy-btn" data-copy="${key}">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Copiar todo
+                Copiar todos los datos
               </button>
             </div>
           </div>
@@ -728,6 +770,82 @@
       });
       
       html += `
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      return html;
+    }
+    
+    function crearHTMLFormulariosApertura() {
+      const seccion = SECCIONES.institucional;
+      
+      let html = `
+        <div class="card bg-white rounded-lg overflow-hidden shadow institucional-card institucional-section" data-id="formularios-apertura">
+          <div class="p-6">
+            <div class="flex items-center mb-4">
+              <div class="w-10 h-10 rounded-full ${seccion.color} flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900">Formularios de Apertura</h3>
+            </div>
+            
+            <div class="mb-6">
+              <div class="flex border-b border-gray-200 overflow-x-auto">
+                <div class="form-tab active" data-tab="personas-fisicas">Personas Físicas</div>
+                <div class="form-tab" data-tab="personas-juridicas">Personas Jurídicas</div>
+              </div>
+              
+              <div class="py-4">
+                <!-- Personas Físicas -->
+                <div class="form-content active" id="tab-personas-fisicas">
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div class="card bg-white p-4 rounded-lg shadow-sm">
+                        <h4 class="font-semibold text-lg mb-2">Formulario de Apertura</h4>
+                        <p class="text-gray-600 mb-4">Formulario para la apertura de cuenta de personas físicas.</p>
+                        <a href="formularios/persona-fisica-formulario.pdf" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-lg text-sm font-medium text-center">
+                          Descargar Formulario
+                        </a>
+                      </div>
+                      
+                      <div class="card bg-white p-4 rounded-lg shadow-sm">
+                        <h4 class="font-semibold text-lg mb-2">Requisitos de Apertura</h4>
+                        <p class="text-gray-600 mb-4">Documentación necesaria para la apertura de cuenta.</p>
+                        <a href="formularios/persona-fisica-requisitos.pdf" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-lg text-sm font-medium text-center">
+                          Descargar Requisitos
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Personas Jurídicas -->
+                <div class="form-content" id="tab-personas-juridicas">
+                  <div class="bg-gray-50 p-4 rounded-lg">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div class="card bg-white p-4 rounded-lg shadow-sm">
+                        <h4 class="font-semibold text-lg mb-2">Formulario de Apertura</h4>
+                        <p class="text-gray-600 mb-4">Formulario para la apertura de cuenta de personas jurídicas.</p>
+                        <a href="formularios/persona-juridica-formulario.pdf" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-lg text-sm font-medium text-center">
+                          Descargar Formulario
+                        </a>
+                      </div>
+                      
+                      <div class="card bg-white p-4 rounded-lg shadow-sm">
+                        <h4 class="font-semibold text-lg mb-2">Requisitos de Apertura</h4>
+                        <p class="text-gray-600 mb-4">Documentación necesaria para la apertura de cuenta.</p>
+                        <a href="formularios/persona-juridica-requisitos.pdf" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-lg text-sm font-medium text-center">
+                          Descargar Requisitos
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -755,8 +873,26 @@
       });
     }
     
+    function configurarPestañasFormularios() {
+      const tabs = document.querySelectorAll('.form-tab');
+      if (tabs.length === 0) return;
+      
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          // Desactivar todas las pestañas
+          document.querySelectorAll('.form-tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.form-content').forEach(c => c.classList.remove('active'));
+          
+          // Activar la pestaña seleccionada
+          this.classList.add('active');
+          const tabId = this.getAttribute('data-tab');
+          document.getElementById(`tab-${tabId}`).classList.add('active');
+        });
+      });
+    }
+    
     function configurarBotonesCopiar() {
-      // Botones para copiar solo CBU
+      // Botones para copiar todos los datos
       const botonesCopiar = document.querySelectorAll('.copy-btn');
       botonesCopiar.forEach(boton => {
         boton.addEventListener('click', function() {
@@ -765,22 +901,8 @@
           
           if (!cuenta) return;
           
-          // Copiar solo el CBU
-          copiarAlPortapapeles(cuenta.cbu, "CBU copiado al portapapeles");
-        });
-      });
-      
-      // Botones para copiar todos los datos
-      const botonesCopiarTodo = document.querySelectorAll('.copy-all-btn');
-      botonesCopiarTodo.forEach(boton => {
-        boton.addEventListener('click', function() {
-          const cuentaId = this.getAttribute('data-copy');
-          const cuenta = CUENTAS_FONDEO[cuentaId];
-          
-          if (!cuenta) return;
-          
-          // Crear texto para copiar todos los datos
-          let textoCopiar = `${cuenta.titulo}\n`;
+          // Crear texto para copiar todos los datos con los títulos
+          let textoCopiar = `Nombre: ${cuenta.titulo}\n`;
           textoCopiar += `CUIT: ${cuenta.cuit}\n`;
           textoCopiar += `Tipo: ${cuenta.tipo}\n`;
           textoCopiar += `CBU: ${cuenta.cbu}\n`;
@@ -789,7 +911,7 @@
             textoCopiar += `Alias: ${cuenta.alias}\n`;
           }
           
-          copiarAlPortapapeles(textoCopiar, "Todos los datos copiados al portapapeles");
+          copiarAlPortapapeles(textoCopiar, "Datos copiados al portapapeles");
         });
       });
     }
@@ -831,53 +953,8 @@
       }, 3000);
     }
     
-    // Función para actualizar la fecha de un reporte cuando se actualiza el documento
-    function actualizarFechaReporte(id) {
-      if (reportes[id]) {
-        const ahora = new Date();
-        reportes[id].fecha = ahora.toLocaleDateString();
-        reportes[id].ultimaActualizacion = ahora.toISOString();
-        
-        // Guardar en localStorage
-        localStorage.setItem("vetacap_reportes", JSON.stringify(reportes));
-        
-        // Actualizar la interfaz si el usuario está logueado
-        if (usuarioActual) {
-          renderizarSeccionActual();
-        }
-      }
-    }
-    
-    // Función para añadir una nueva sección al portal
-    function agregarNuevaSeccion(id, titulo, descripcion, icono, color) {
-      // Añadir a la configuración de secciones
-      SECCIONES[id] = {
-        titulo: titulo,
-        descripcion: descripcion,
-        icono: icono,
-        color: color
-      };
-      
-      // Crear enlace de navegación
-      const nav = document.getElementById("main-nav");
-      const enlace = document.createElement("a");
-      enlace.href = "#";
-      enlace.className = "nav-link";
-      enlace.setAttribute("data-section", id);
-      enlace.id = `nav-${id}`;
-      enlace.textContent = titulo;
-      enlace.addEventListener("click", function(e) {
-        e.preventDefault();
-        cambiarSeccion(id);
-      });
-      
-      nav.appendChild(enlace);
-      
-      console.log(`Nueva sección "${titulo}" añadida al portal`);
-    }
-    
     // Inicializar la aplicación cuando se carga la página
     document.addEventListener("DOMContentLoaded", inicializar);
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93f461a42649d7c1',t:'MTc0NzE2MjY0NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93fcf817a2c50ec7',t:'MTc0NzI1MjY5NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
