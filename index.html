@@ -9,13 +9,16 @@
   <style>
     :root {
       --primary: #1036E2;
+      --primary-dark: #021751;
       --secondary: #00C600;
-      --dark-blue: #021751;
+      --secondary-dark: #00a000;
+      --gray-light: #F9FAFB;
+      --gray-medium: #E5E7EB;
     }
     
     body {
       font-family: 'Albert Sans', sans-serif;
-      background-color: #FFFFFF;
+      background-color: var(--gray-light);
     }
     
     .btn-primary {
@@ -25,7 +28,7 @@
     }
     
     .btn-primary:hover {
-      background-color: var(--dark-blue);
+      background-color: var(--primary-dark);
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(16, 54, 226, 0.2);
     }
@@ -37,214 +40,283 @@
     }
     
     .btn-secondary:hover {
-      background-color: #00a000;
+      background-color: var(--secondary-dark);
       transform: translateY(-2px);
-    }
-    
-    .btn-outline {
-      border: 1px solid var(--primary);
-      color: var(--primary);
-      background-color: transparent;
-      transition: all 0.2s ease;
-    }
-    
-    .btn-outline:hover {
-      background-color: var(--primary);
-      color: white;
     }
     
     .card {
       transition: all 0.3s ease;
-      border: 1px solid #E5E7EB;
-    }
-    
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-    }
-    
-    .nav-link {
-      position: relative;
-      padding: 1rem 0;
-      margin: 0 1rem;
-      color: #4B5563;
-      font-weight: 500;
-      transition: all 0.2s ease;
-    }
-    
-    .nav-link:hover {
-      color: var(--primary);
-    }
-    
-    .nav-link.active {
-      color: var(--primary);
-      font-weight: 600;
-    }
-    
-    .nav-link.active::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background-color: var(--primary);
-    }
-    
-    /* Estilos específicos para la sección de estrategia */
-    .estrategia-card {
-      border-left: 4px solid var(--primary);
-    }
-    
-    /* Estilos específicos para la sección institucional */
-    .institucional-card {
-      border-left: 4px solid var(--secondary);
-    }
-    
-    /* Estilos para futuras secciones */
-    .vetaflat-card {
-      border-left: 4px solid #9333EA;
-    }
-    
-    .financiamiento-card {
-      border-left: 4px solid #F59E0B;
-    }
-    
-    /* Estilos para las pestañas de cuentas */
-    .account-tab {
-      cursor: pointer;
-      padding: 0.75rem 1rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
-      border-bottom: 2px solid transparent;
-    }
-    
-    .account-tab:hover {
-      color: var(--secondary);
-    }
-    
-    .account-tab.active {
-      color: var(--secondary);
-      border-bottom-color: var(--secondary);
-      font-weight: 600;
-    }
-    
-    .account-content {
-      display: none;
-    }
-    
-    .account-content.active {
-      display: block;
-    }
-    
-    .account-detail {
-      display: flex;
-      border-bottom: 1px solid #E5E7EB;
-      padding: 0.75rem 0;
-    }
-    
-    .account-detail:last-child {
-      border-bottom: none;
-    }
-    
-    .account-label {
-      width: 40%;
-      font-weight: 500;
-      color: #4B5563;
-    }
-    
-    .account-value {
-      width: 60%;
-      color: #111827;
-    }
-    
-    /* Estilos para las pestañas de formularios */
-    .form-tab {
-      cursor: pointer;
-      padding: 0.75rem 1rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
-      border-bottom: 2px solid transparent;
-    }
-    
-    .form-tab:hover {
-      color: var(--secondary);
-    }
-    
-    .form-tab.active {
-      color: var(--secondary);
-      border-bottom-color: var(--secondary);
-      font-weight: 600;
-    }
-    
-    .form-content {
-      display: none;
-    }
-    
-    .form-content.active {
-      display: block;
-    }
-    
-    /* Mejoras visuales adicionales */
-    .copy-btn {
-      transition: all 0.3s ease;
-    }
-    
-    .copy-btn:hover {
-      transform: translateY(-2px);
-    }
-    
-    .institucional-section {
-      margin-bottom: 2rem;
-    }
-    
-    /* Estilos para la sección de estrategia */
-    .estrategia-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-    
-    .estrategia-card {
+      border: 1px solid var(--gray-medium);
       height: 100%;
       display: flex;
       flex-direction: column;
     }
     
-    .estrategia-card-content {
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .card-body {
       flex: 1;
       display: flex;
       flex-direction: column;
     }
     
-    .estrategia-card-footer {
+    .card-footer {
       margin-top: auto;
-      padding-top: 1rem;
+    }
+    
+    /* Navigation */
+    .nav-item {
+      position: relative;
+      transition: all 0.2s ease;
+      padding: 1rem 1.25rem;
+      color: #4B5563;
+      font-weight: 500;
+    }
+    
+    .nav-item:hover {
+      color: var(--primary);
+    }
+    
+    .nav-item.active {
+      color: var(--primary);
+      font-weight: 600;
+    }
+    
+    .nav-item.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: var(--primary);
+      border-radius: 3px 3px 0 0;
+    }
+    
+    /* Section styles */
+    .section-estrategia {
+      border-left: 4px solid var(--primary);
+    }
+    
+    .section-institucional {
+      border-left: 4px solid var(--primary);
+    }
+    
+    .section-minuta {
+      border-left: 4px solid var(--secondary);
+    }
+    
+    /* Tab styles */
+    .tab-container {
+      border-bottom: 1px solid var(--gray-medium);
+    }
+    
+    .tab {
+      padding: 10px 16px;
+      font-weight: 500;
+      color: #4B5563;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    
+    .tab:hover {
+      color: var(--primary);
+    }
+    
+    .tab.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      font-weight: 600;
+    }
+    
+    .tab-content {
+      display: none;
+      padding: 16px 0;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    /* Toast notification */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 16px;
+      background-color: #1F2937;
+      color: white;
+      border-radius: 6px;
+      box-shadow: 0 8px 12px -3px rgba(0, 0, 0, 0.1);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+    }
+    
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .nav-container {
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+      
+      .nav-item {
+        padding: 0.75rem 1rem;
+      }
+      
+      .nav-item.active::after {
+        bottom: 0;
+      }
+    }
+    
+    /* Eliminar espacio blanco del costado izquierdo */
+    .container {
+      width: 100%;
+      max-width: 100%;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    
+    /* Cambiar color de los íconos */
+    .icon-primary {
+      color: var(--primary);
+    }
+    
+    /* Minuta Semanal styles */
+    .minuta-container {
+      background-color: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1.5rem;
+    }
+    
+    .minuta-header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--gray-medium);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .minuta-content {
+      padding: 1.5rem;
+    }
+    
+    .minuta-date {
+      font-size: 0.875rem;
+      color: #6B7280;
+    }
+    
+    .minuta-text {
+      white-space: pre-line;
+      line-height: 1.6;
+      color: #1F2937;
+    }
+    
+    /* Cierre de Mercado styles */
+    .cierre-mercado-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    @media (max-width: 640px) {
+      .cierre-mercado-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .cierre-mercado-card {
+      background-color: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      border-left: 4px solid var(--primary);
+    }
+    
+    .cierre-mercado-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1F2937;
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Trade Ideas styles */
+    .trade-ideas-container {
+      background-color: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1.5rem;
+      border-left: 4px solid var(--primary);
+    }
+    
+    .trade-ideas-header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--gray-medium);
+      display: flex;
+      align-items: center;
+    }
+    
+    .trade-ideas-content {
+      padding: 1rem;
+    }
+    
+    .trade-idea-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem;
+      border-bottom: 1px solid var(--gray-medium);
+    }
+    
+    .trade-idea-item:last-child {
+      border-bottom: none;
+    }
+    
+    .trade-idea-title {
+      font-weight: 500;
+      color: #1F2937;
     }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
   <!-- Login Section -->
   <div class="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-white to-gray-100" id="login-box">
-    <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
-      <div class="text-center mb-8">
-        <img src="assets/VetaCap_Brandpack_Positivo-RGB.png" alt="Vetacap Logo" class="w-48 mx-auto mb-6">
-        <h2 class="text-2xl font-bold text-gray-800">Portal Interno</h2>
-        <p class="text-gray-500 mt-2">Ingresa tus credenciales para acceder</p>
+    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+      <div class="text-center mb-6">
+        <img src="assets/VetaCap_Brandpack_Positivo-RGB.png" alt="Vetacap Logo" class="w-40 mx-auto mb-4">
+        <h2 class="text-xl font-bold text-gray-800">Portal Interno</h2>
+        <p class="text-gray-500 mt-1 text-sm">Ingresa tus credenciales para acceder</p>
       </div>
       
-      <div class="space-y-5">
+      <div class="space-y-4">
         <div>
           <label for="usuario" class="block text-sm font-medium text-gray-700 mb-1">Usuario</label>
-          <input type="text" id="usuario" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="Ingresa tu usuario" />
+          <input type="text" id="usuario" class="w-full px-3 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="Ingresa tu usuario" />
         </div>
         
         <div>
           <label for="clave" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
-          <input type="password" id="clave" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="Ingresa tu contraseña" />
+          <input type="password" id="clave" class="w-full px-3 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="Ingresa tu contraseña" />
         </div>
         
-        <button onclick="validar()" class="w-full py-3 rounded-lg btn-primary font-semibold text-white focus:outline-none">
+        <button onclick="validar()" class="w-full py-2 rounded-md btn-primary font-medium text-white focus:outline-none">
           Ingresar
         </button>
         
@@ -255,70 +327,76 @@
 
   <!-- Main Content Section -->
   <div class="hidden flex flex-col min-h-screen" id="contenido">
-    <!-- Header -->
-    <header class="bg-white shadow-sm">
-      <div class="max-w-7xl mx-auto">
-        <!-- Top Header -->
-        <div class="flex justify-between items-center px-4 py-4 border-b border-gray-200">
-          <div>
-            <img src="assets/VetaCap_Brandpack_Positivo-RGB.png" alt="Vetacap Logo" class="h-10">
+    <!-- Top Header -->
+    <header class="bg-white shadow-sm z-10">
+      <div class="w-full px-4">
+        <div class="py-3 flex justify-between items-center">
+          <div class="flex items-center">
+            <img src="assets/VetaCap_Brandpack_Positivo-RGB.png" alt="Vetacap Logo" class="h-8">
           </div>
           
-          <div class="flex items-center space-x-4">
-            <div class="flex items-center">
-              <span class="text-gray-600 mr-2">Bienvenido/a</span>
-              <span class="font-medium text-gray-800" id="nombre-usuario">Usuario</span>
+          <div class="flex items-center space-x-3">
+            <div class="relative group">
+              <button class="flex items-center space-x-2 focus:outline-none">
+                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-semibold text-sm">
+                  EC
+                </div>
+                <div class="hidden md:block text-left">
+                  <div class="text-sm font-medium text-gray-700" id="nombre-usuario">Equipo Comercial</div>
+                  <div class="text-xs text-gray-500">Comercial</div>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </button>
+              
+              <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 hidden group-hover:block">
+                <div class="px-4 py-2 border-b border-gray-100">
+                  <div class="text-sm font-medium text-gray-900">Equipo Comercial</div>
+                  <div class="text-xs text-gray-500">comercial@vetacap.com</div>
+                </div>
+                <button onclick="cerrarSesion()" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  Cerrar sesión
+                </button>
+              </div>
             </div>
-            <button onclick="cerrarSesion()" class="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium transition">
-              Cerrar sesión
-            </button>
           </div>
         </div>
         
         <!-- Navigation -->
-        <nav class="flex px-4 overflow-x-auto whitespace-nowrap" id="main-nav">
-          <a href="#" class="nav-link" data-section="institucional" id="nav-institucional">
-            Institucional
-          </a>
-          <a href="#" class="nav-link active" data-section="estrategia" id="nav-estrategia">
-            Estrategia
-          </a>
-          <!-- Espacio para futuras secciones -->
-          <!-- <a href="#" class="nav-link" data-section="vetaflat" id="nav-vetaflat">
-            VetaFlat
-          </a>
-          <a href="#" class="nav-link" data-section="financiamiento" id="nav-financiamiento">
-            Financiamiento
-          </a> -->
-        </nav>
+        <div class="nav-container border-b border-gray-200">
+          <nav class="flex overflow-x-auto">
+            <div class="nav-item active" data-section="institucional">
+              Institucional
+            </div>
+            <div class="nav-item" data-section="estrategia">
+              Estrategia
+            </div>
+            <div class="nav-item" data-section="vetaflat">
+              VetaFlat
+            </div>
+            <div class="nav-item" data-section="financiamiento">
+              Financiamiento
+            </div>
+          </nav>
+        </div>
       </div>
     </header>
     
-    <!-- Content Sections Container -->
-    <main class="flex-grow bg-white">
-      <div class="max-w-7xl mx-auto px-4 py-8" id="content-container">
+    <!-- Main Content -->
+    <main class="flex-1 py-5">
+      <div class="w-full px-4" id="content-container">
         <!-- Las secciones se cargarán dinámicamente aquí -->
       </div>
     </main>
-    
-    <!-- Footer -->
-    <footer class="bg-dark-blue text-white py-6 mt-auto">
-      <div class="max-w-7xl mx-auto px-4">
-        <div class="flex flex-col md:flex-row justify-between items-center">
-          <div class="mb-4 md:mb-0">
-            <img src="assets/VetaCap_Brandpack_Positivo-RGB.png" alt="Vetacap Logo" class="h-8 brightness-0 invert">
-          </div>
-          <div class="text-sm text-gray-300">
-            © 2023 Vetacap. Todos los derechos reservados.
-          </div>
-        </div>
-      </div>
-    </footer>
   </div>
   
-  <!-- Toast de notificación -->
-  <div id="toast" class="fixed bottom-4 right-4 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-10 opacity-0 transition-all duration-300 flex items-center z-50">
-    <span id="toast-message">Cambios guardados correctamente</span>
+  <!-- Toast notification -->
+  <div id="toast" class="toast">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+    </svg>
+    <span id="toast-message">Datos copiados al portapapeles</span>
   </div>
 
   <script>
@@ -337,35 +415,34 @@
       estrategia: {
         titulo: "Reportes Estratégicos",
         descripcion: "Accede a los últimos informes y análisis para la toma de decisiones.",
-        icono: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        icono: `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
         </svg>`,
-        color: "bg-primary"
+        color: "bg-blue-600"
       },
       institucional: {
         titulo: "Recursos Institucionales",
         descripcion: "Accede a documentos y recursos corporativos de Vetacap.",
-        icono: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        icono: `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
         </svg>`,
-        color: "bg-secondary"
+        color: "bg-blue-600"
       },
-      // Espacio para futuras secciones
       vetaflat: {
         titulo: "VetaFlat",
         descripcion: "Plataforma de inversión inmobiliaria.",
-        icono: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        icono: `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
         </svg>`,
-        color: "bg-purple-600"
+        color: "bg-blue-600"
       },
       financiamiento: {
         titulo: "Financiamiento",
         descripcion: "Soluciones de financiamiento para empresas.",
-        icono: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        icono: `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>`,
-        color: "bg-yellow-500"
+        color: "bg-blue-600"
       }
     };
     
@@ -401,13 +478,73 @@
       }
     };
     
+    // Contenido de la Minuta Semanal
+    // Este contenido se carga desde el archivo minuta-semanal.js
+    let MINUTA_SEMANAL_CONTENIDO = {
+      fecha: "2023-06-05", // Formato YYYY-MM-DD
+      contenido: `
+        <p class="font-semibold mb-2">Lineamientos de la semana:</p>
+        
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Mantener posiciones en bonos CER</li>
+          <li>Reducir exposición a bonos dollar linked</li>
+          <li>Aumentar liquidez en pesos para aprovechar oportunidades</li>
+          <li>Mantener cobertura cambiaria</li>
+          <li>Evaluar oportunidades en ONs corporativas</li>
+        </ul>
+        
+        <p class="mt-3 text-sm text-gray-600">Nota: Estas recomendaciones están sujetas a cambios según la evolución del mercado.</p>
+      `
+    };
+    
+    // Contenido de Trade Ideas Vigentes
+    // Este contenido se puede editar directamente aquí o cargar desde un archivo externo
+    let TRADE_IDEAS_VIGENTES = [
+      {
+        id: 1,
+        titulo: "Bonos CER a diciembre",
+        descripcion: "Estrategia de inversión en bonos CER con vencimiento en diciembre",
+        url: "reportes/trade-ideas/bonos-cer-diciembre.pdf"
+      },
+      {
+        id: 2,
+        titulo: "Cobertura cambiaria con futuros",
+        descripcion: "Estrategia de cobertura utilizando futuros de dólar",
+        url: "reportes/trade-ideas/cobertura-futuros.pdf"
+      },
+      {
+        id: 3,
+        titulo: "Arbitraje de ONs corporativas",
+        descripcion: "Oportunidad de arbitraje entre ONs del mismo emisor",
+        url: "reportes/trade-ideas/arbitraje-ons.pdf"
+      },
+      {
+        id: 4,
+        titulo: "Posicionamiento en Lecaps",
+        descripcion: "Estrategia de inversión en Lecaps de corto plazo",
+        url: "reportes/trade-ideas/lecaps-corto-plazo.pdf"
+      },
+      {
+        id: 5,
+        titulo: "Carry trade con Cedears",
+        descripcion: "Estrategia de carry trade utilizando Cedears de alta liquidez",
+        url: "reportes/trade-ideas/carry-cedears.pdf"
+      }
+    ];
+    
     // Variables globales
     let reportes = {};
     let usuarioActual = null;
-    let seccionActual = "estrategia";
+    let seccionActual = "institucional";
     
     // Función para inicializar la aplicación
     async function inicializar() {
+      // Cargar el contenido de la minuta semanal
+      cargarMinutaSemanal();
+      
+      // Cargar el contenido de trade ideas
+      cargarTradeIdeas();
+      
       // Comprobar si hay una sesión guardada
       const logeado = localStorage.getItem("vetacap_logeado");
       if (logeado === "true") {
@@ -425,11 +562,48 @@
       inicializarDatosPorDefecto();
     }
     
+    // Función para cargar la minuta semanal desde el archivo externo
+    function cargarMinutaSemanal() {
+      // Intentar cargar desde el archivo externo
+      try {
+        // Si estamos en un entorno de desarrollo local, podemos usar fetch
+        fetch('minuta-semanal.json')
+          .then(response => response.json())
+          .then(data => {
+            MINUTA_SEMANAL_CONTENIDO = data;
+          })
+          .catch(error => {
+            console.log('No se pudo cargar el archivo minuta-semanal.json. Usando contenido por defecto.');
+          });
+      } catch (error) {
+        console.log('Error al cargar la minuta semanal:', error);
+      }
+    }
+    
+    // Función para cargar las trade ideas desde el archivo externo
+    function cargarTradeIdeas() {
+      // Intentar cargar desde el archivo externo
+      try {
+        // Si estamos en un entorno de desarrollo local, podemos usar fetch
+        fetch('trade-ideas.json')
+          .then(response => response.json())
+          .then(data => {
+            TRADE_IDEAS_VIGENTES = data;
+          })
+          .catch(error => {
+            console.log('No se pudo cargar el archivo trade-ideas.json. Usando contenido por defecto.');
+          });
+      } catch (error) {
+        console.log('Error al cargar las trade ideas:', error);
+      }
+    }
+    
     // Configurar eventos de navegación
     function configurarNavegacion() {
-      const navLinks = document.querySelectorAll("#main-nav .nav-link");
-      navLinks.forEach(link => {
-        link.addEventListener("click", function(e) {
+      // Navegación principal
+      const navItems = document.querySelectorAll(".nav-item");
+      navItems.forEach(item => {
+        item.addEventListener("click", function(e) {
           e.preventDefault();
           const seccion = this.getAttribute("data-section");
           cambiarSeccion(seccion);
@@ -446,7 +620,8 @@
           titulo: "Reporte Semanal Mesa",
           descripcion: "Análisis semanal de mercados y estrategias de inversión",
           url: "reportes/Reporte Semanal Mesa.pdf",
-          textoBoton: "Ver reporte"
+          textoBoton: "Ver reporte",
+          orden: 3
         },
         "gestion-liquidez": {
           id: "gestion-liquidez",
@@ -454,7 +629,8 @@
           titulo: "Gestión de Liquidez",
           descripcion: "Curva de pesos y breakevens",
           url: "reportes/Gestion_de_Liquidez.pdf",
-          textoBoton: "Ver reporte"
+          textoBoton: "Ver reporte",
+          orden: 4
         },
         "cobertura-cambiaria": {
           id: "cobertura-cambiaria",
@@ -462,13 +638,38 @@
           titulo: "Cobertura Cambiaria",
           descripcion: "Estrategias de cobertura cambiaria",
           url: "reportes/Cobertura_Cambiaria.pdf",
-          textoBoton: "Ver reporte"
+          textoBoton: "Ver reporte",
+          orden: 5
+        },
+        "minuta-semanal": {
+          id: "minuta-semanal",
+          seccion: "estrategia",
+          titulo: "Minuta Semanal",
+          descripcion: "Lineamientos y recomendaciones semanales para clientes",
+          customRender: true,
+          orden: 0 // Aparece primero
+        },
+        "cierre-mercado": {
+          id: "cierre-mercado",
+          seccion: "estrategia",
+          titulo: "Cierre de Mercado",
+          descripcion: "Informes de cierre diario del mercado",
+          customRender: true,
+          orden: 1 // Aparece después de Minuta Semanal
+        },
+        "trade-ideas": {
+          id: "trade-ideas",
+          seccion: "estrategia",
+          titulo: "Trade Ideas Vigentes",
+          descripcion: "Ideas de inversión actuales recomendadas por el equipo",
+          customRender: true,
+          orden: 2 // Aparece después de Cierre de Mercado
         },
         "presentacion-institucional": {
           id: "presentacion-institucional",
           seccion: "institucional",
           titulo: "Presentación Institucional",
-          descripcion: "",
+          descripcion: "Información general sobre Vetacap y sus servicios",
           url: "#",
           textoBoton: "Descargar PPT",
           orden: 1
@@ -477,7 +678,7 @@
           id: "formularios-apertura",
           seccion: "institucional",
           titulo: "Formularios de Apertura",
-          descripcion: "",
+          descripcion: "Documentos necesarios para la apertura de cuentas",
           url: "#",
           textoBoton: "Ver formularios",
           customRender: true,
@@ -487,7 +688,7 @@
           id: "datos-cuenta",
           seccion: "institucional",
           titulo: "Datos de Cuentas de Fondeo",
-          descripcion: "",
+          descripcion: "Información bancaria para transferencias",
           url: "#",
           textoBoton: "Consultar datos",
           customRender: true,
@@ -528,6 +729,15 @@
       // Mostrar nombre de usuario
       document.getElementById("nombre-usuario").textContent = usuarioActual.nombre;
       
+      // Asegurarse de que la sección institucional esté activa en la navegación
+      document.querySelectorAll(".nav-item").forEach(item => {
+        item.classList.remove("active");
+      });
+      document.querySelector(`.nav-item[data-section="institucional"]`).classList.add("active");
+      
+      // Establecer la sección actual como institucional
+      seccionActual = "institucional";
+      
       // Renderizar la sección actual
       renderizarSeccionActual();
     }
@@ -550,10 +760,10 @@
     
     function cambiarSeccion(seccion) {
       // Actualizar navegación
-      document.querySelectorAll("#main-nav .nav-link").forEach(link => {
-        link.classList.remove("active");
+      document.querySelectorAll(".nav-item").forEach(item => {
+        item.classList.remove("active");
       });
-      document.getElementById(`nav-${seccion}`).classList.add("active");
+      document.querySelector(`.nav-item[data-section="${seccion}"]`).classList.add("active");
       
       // Actualizar sección actual
       seccionActual = seccion;
@@ -568,36 +778,36 @@
       
       // Crear el HTML de la sección
       let html = `
-        <div class="mb-6">
-          <h1 class="text-3xl font-bold text-gray-900">${seccion.titulo}</h1>
-          <p class="text-gray-600 mt-2">${seccion.descripcion}</p>
+        <div class="mb-5">
+          <h1 class="text-2xl font-bold text-gray-900">${seccion.titulo}</h1>
+          <p class="text-gray-600 text-sm mt-1">${seccion.descripcion}</p>
         </div>
       `;
       
       // Filtrar reportes por sección
       let reportesSeccion = Object.values(reportes).filter(reporte => reporte.seccion === seccionActual);
       
-      // Si estamos en la sección institucional, ordenar los elementos
-      if (seccionActual === "institucional") {
+      // Si estamos en la sección institucional o estrategia, ordenar los elementos
+      if (seccionActual === "institucional" || seccionActual === "estrategia") {
         reportesSeccion.sort((a, b) => (a.orden || 999) - (b.orden || 999));
       }
       
       // Si no hay reportes, mostrar mensaje
       if (reportesSeccion.length === 0) {
         html += `
-          <div class="text-center py-10">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div class="text-center py-8 bg-white rounded-lg shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-blue-600 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
-            <p class="text-gray-500 text-lg">No hay reportes disponibles en esta sección.</p>
+            <p class="text-gray-500">No hay reportes disponibles en esta sección.</p>
           </div>
         `;
       } else {
         // Iniciar el contenedor para la sección
-        if (seccionActual === "estrategia") {
-          html += `<div class="estrategia-grid" id="reportes-${seccionActual}">`;
+        if (seccionActual === "institucional") {
+          html += `<div class="space-y-5" id="reportes-${seccionActual}">`;
         } else {
-          html += `<div class="space-y-8" id="reportes-${seccionActual}">`;
+          html += `<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="reportes-${seccionActual}">`;
         }
         
         // Agregar cada reporte
@@ -607,13 +817,15 @@
               html += crearHTMLCuentasFondeo();
             } else if (reporte.id === "formularios-apertura") {
               html += crearHTMLFormulariosApertura();
+            } else if (reporte.id === "minuta-semanal") {
+              html += crearHTMLMinutaSemanal();
+            } else if (reporte.id === "cierre-mercado") {
+              html += crearHTMLCierreMercado();
+            } else if (reporte.id === "trade-ideas") {
+              html += crearHTMLTradeIdeas();
             }
           } else {
-            if (seccionActual === "estrategia") {
-              html += crearHTMLReporteEstrategia(reporte);
-            } else {
-              html += crearHTMLReporte(reporte);
-            }
+            html += crearHTMLReporte(reporte);
           }
         });
         
@@ -631,58 +843,158 @@
       }
     }
     
-    function crearHTMLReporte(reporte) {
-      const seccion = SECCIONES[reporte.seccion];
-      const cardClass = `${reporte.seccion}-card`;
-      
-      // Crear HTML del reporte
-      let html = `
-        <div class="card bg-white rounded-lg overflow-hidden shadow ${cardClass} institucional-section" data-id="${reporte.id}">
-          <div class="p-6">
-            <div class="flex items-center mb-4">
-              <div class="w-10 h-10 rounded-full ${seccion.color} flex items-center justify-center mr-3">
-                ${seccion.icono}
+    function crearHTMLTradeIdeas() {
+      return `
+        <div class="col-span-1 md:col-span-2 lg:col-span-3">
+          <div class="trade-ideas-container">
+            <div class="trade-ideas-header">
+              <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
               </div>
-              <h3 class="text-xl font-semibold text-gray-900">${reporte.titulo}</h3>
+              <h3 class="text-lg font-semibold text-gray-900">Trade Ideas Vigentes</h3>
             </div>
-      `;
-      
-      // Agregar descripción solo si existe y no es sección institucional
-      if (reporte.descripcion && seccionActual !== "institucional") {
-        html += `<p class="text-gray-600 mb-4">${reporte.descripcion}</p>`;
-      }
-      
-      html += `
-            <div class="flex justify-between items-center">
-              <a href="${reporte.url}" target="_blank" class="btn-primary inline-block px-6 py-2 rounded-lg text-sm font-medium text-center">
-                ${reporte.textoBoton}
-              </a>
+            
+            <div class="trade-ideas-content">
+              ${TRADE_IDEAS_VIGENTES.map(idea => `
+                <div class="trade-idea-item">
+                  <div class="trade-idea-title">${idea.titulo}</div>
+                  <a href="${idea.url}" target="_blank" class="btn-primary inline-block px-3 py-1.5 rounded-md text-xs font-medium text-center">
+                    Ver detalle
+                  </a>
+                </div>
+              `).join('')}
+              
+              <div class="mt-4 pt-3 border-t border-gray-100 text-xs text-gray-500">
+                <div class="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  Editar las trade ideas en el archivo trade-ideas.json
+                </div>
+              </div>
             </div>
           </div>
         </div>
       `;
-      
-      return html;
     }
     
-    function crearHTMLReporteEstrategia(reporte) {
-      const seccion = SECCIONES[reporte.seccion];
+    function crearHTMLCierreMercado() {
+      return `
+        <div class="col-span-1 md:col-span-2 lg:col-span-3">
+          <div class="cierre-mercado-container">
+            <div class="cierre-mercado-card">
+              <div class="flex items-center mb-3">
+                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900">Cierre de Mercado #1</h3>
+              </div>
+              <p class="text-gray-600 text-sm mb-4">Informe de cierre del mercado local</p>
+              <div class="mt-auto">
+                <a href="#" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
+                  Ver informe
+                </a>
+              </div>
+            </div>
+            
+            <div class="cierre-mercado-card">
+              <div class="flex items-center mb-3">
+                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900">Cierre de Mercado #2</h3>
+              </div>
+              <p class="text-gray-600 text-sm mb-4">Informe de cierre del mercado internacional</p>
+              <div class="mt-auto">
+                <a href="#" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
+                  Ver informe
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    
+    function crearHTMLMinutaSemanal() {
+      // Formatear la fecha
+      let fechaFormateada = "Fecha no disponible";
+      try {
+        if (MINUTA_SEMANAL_CONTENIDO.fecha) {
+          const fecha = new Date(MINUTA_SEMANAL_CONTENIDO.fecha);
+          fechaFormateada = fecha.toLocaleDateString('es-ES', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+        }
+      } catch (error) {
+        console.error("Error al formatear la fecha:", error);
+      }
       
-      // Crear HTML del reporte con diseño optimizado para estrategia
-      let html = `
-        <div class="card bg-white rounded-lg overflow-hidden shadow estrategia-card" data-id="${reporte.id}">
-          <div class="p-5 estrategia-card-content">
+      return `
+        <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia col-span-1 md:col-span-2 lg:col-span-3" data-id="minuta-semanal">
+          <div class="p-5 card-body">
             <div class="flex items-center mb-3">
-              <div class="w-10 h-10 rounded-full ${seccion.color} flex items-center justify-center mr-3">
+              <div class="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-gray-900">Minuta Semanal</h3>
+                <p class="text-xs text-gray-500">${fechaFormateada}</p>
+              </div>
+            </div>
+            
+            <div class="prose max-w-none text-sm">
+              ${MINUTA_SEMANAL_CONTENIDO.contenido}
+            </div>
+            
+            <div class="card-footer mt-4 pt-3 border-t border-gray-100">
+              <div class="flex items-center text-xs text-blue-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Actualizar en minuta-semanal.json
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    
+    function crearHTMLReporte(reporte) {
+      const seccion = SECCIONES[reporte.seccion];
+      const sectionClass = `section-${reporte.seccion}`;
+      
+      // Crear HTML del reporte
+      let html = `
+        <div class="card bg-white rounded-lg overflow-hidden shadow-sm ${sectionClass}" data-id="${reporte.id}">
+          <div class="p-5 card-body">
+            <div class="flex items-center mb-3">
+              <div class="w-8 h-8 rounded-full ${seccion.color} flex items-center justify-center mr-3">
                 ${seccion.icono}
               </div>
               <h3 class="text-lg font-semibold text-gray-900">${reporte.titulo}</h3>
             </div>
-            
-            <p class="text-gray-600 text-sm mb-4">${reporte.descripcion}</p>
-            
-            <div class="estrategia-card-footer">
-              <a href="${reporte.url}" target="_blank" class="btn-primary w-full inline-block px-4 py-2 rounded-lg text-sm font-medium text-center">
+      `;
+      
+      // Agregar descripción solo si existe
+      if (reporte.descripcion) {
+        html += `<p class="text-gray-600 text-sm mb-4">${reporte.descripcion}</p>`;
+      }
+      
+      html += `
+            <div class="card-footer mt-auto">
+              <a href="${reporte.url}" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
                 ${reporte.textoBoton}
               </a>
             </div>
@@ -697,26 +1009,26 @@
       const seccion = SECCIONES.institucional;
       
       let html = `
-        <div class="card bg-white rounded-lg overflow-hidden shadow institucional-card institucional-section" data-id="datos-cuenta">
-          <div class="p-6">
-            <div class="flex items-center mb-4">
-              <div class="w-10 h-10 rounded-full ${seccion.color} flex items-center justify-center mr-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-institucional" data-id="datos-cuenta">
+          <div class="p-5">
+            <div class="flex items-center mb-3">
+              <div class="w-8 h-8 rounded-full ${seccion.color} flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                 </svg>
               </div>
-              <h3 class="text-xl font-semibold text-gray-900">Datos de Cuentas de Fondeo</h3>
+              <h3 class="text-lg font-semibold text-gray-900">Datos de Cuentas de Fondeo</h3>
             </div>
             
-            <div class="mb-6">
-              <div class="flex border-b border-gray-200 overflow-x-auto">
-                <div class="account-tab active" data-tab="pesos">PESOS</div>
-                <div class="account-tab" data-tab="usd">USD</div>
-                <div class="account-tab" data-tab="acydi-pesos">ACYDI PESOS</div>
-                <div class="account-tab" data-tab="acydi-usd">ACYDI USD</div>
+            <div class="mb-4">
+              <div class="flex border-b border-gray-200 overflow-x-auto tab-container">
+                <div class="tab active" data-tab="pesos">PESOS</div>
+                <div class="tab" data-tab="usd">USD</div>
+                <div class="tab" data-tab="acydi-pesos">ACYDI PESOS</div>
+                <div class="tab" data-tab="acydi-usd">ACYDI USD</div>
               </div>
               
-              <div class="py-4">
+              <div class="py-3">
       `;
       
       // Crear contenido para cada pestaña
@@ -725,41 +1037,43 @@
         const isActive = key === "pesos" ? "active" : "";
         
         html += `
-          <div class="account-content ${isActive}" id="tab-${key}">
-            <div class="bg-gray-50 p-4 rounded-lg">
-              <div class="account-detail">
-                <div class="account-label">Nombre:</div>
-                <div class="account-value">${cuenta.titulo}</div>
-              </div>
-              <div class="account-detail">
-                <div class="account-label">CUIT:</div>
-                <div class="account-value">${cuenta.cuit}</div>
-              </div>
-              <div class="account-detail">
-                <div class="account-label">Tipo:</div>
-                <div class="account-value">${cuenta.tipo}</div>
-              </div>
-              <div class="account-detail">
-                <div class="account-label">CBU:</div>
-                <div class="account-value">${cuenta.cbu}</div>
-              </div>
+          <div class="tab-content ${isActive}" id="tab-${key}">
+            <div class="bg-gray-50 p-4 rounded-md">
+              <div class="space-y-3">
+                <div class="flex flex-col md:flex-row md:items-center py-2 border-b border-gray-200">
+                  <div class="w-full md:w-1/3 font-medium text-gray-700 mb-1 md:mb-0 text-sm">Nombre:</div>
+                  <div class="w-full md:w-2/3 text-gray-900 text-sm">${cuenta.titulo}</div>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center py-2 border-b border-gray-200">
+                  <div class="w-full md:w-1/3 font-medium text-gray-700 mb-1 md:mb-0 text-sm">CUIT:</div>
+                  <div class="w-full md:w-2/3 text-gray-900 text-sm">${cuenta.cuit}</div>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center py-2 border-b border-gray-200">
+                  <div class="w-full md:w-1/3 font-medium text-gray-700 mb-1 md:mb-0 text-sm">Tipo:</div>
+                  <div class="w-full md:w-2/3 text-gray-900 text-sm">${cuenta.tipo}</div>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center py-2 border-b border-gray-200">
+                  <div class="w-full md:w-1/3 font-medium text-gray-700 mb-1 md:mb-0 text-sm">CBU:</div>
+                  <div class="w-full md:w-2/3 text-gray-900 text-sm">${cuenta.cbu}</div>
+                </div>
         `;
         
         // Mostrar alias solo si existe
         if (cuenta.alias) {
           html += `
-              <div class="account-detail">
-                <div class="account-label">Alias:</div>
-                <div class="account-value">${cuenta.alias}</div>
-              </div>
+                <div class="flex flex-col md:flex-row md:items-center py-2">
+                  <div class="w-full md:w-1/3 font-medium text-gray-700 mb-1 md:mb-0 text-sm">Alias:</div>
+                  <div class="w-full md:w-2/3 text-gray-900 text-sm">${cuenta.alias}</div>
+                </div>
           `;
         }
         
         html += `
+              </div>
             </div>
             <div class="mt-4 flex justify-center">
-              <button class="btn-primary py-2 px-6 rounded-lg text-sm font-medium flex items-center justify-center copy-btn" data-copy="${key}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <button class="btn-primary py-1.5 px-4 rounded-md text-sm font-medium flex items-center justify-center copy-btn" data-copy="${key}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
                 Copiar todos los datos
@@ -783,40 +1097,50 @@
       const seccion = SECCIONES.institucional;
       
       let html = `
-        <div class="card bg-white rounded-lg overflow-hidden shadow institucional-card institucional-section" data-id="formularios-apertura">
-          <div class="p-6">
-            <div class="flex items-center mb-4">
-              <div class="w-10 h-10 rounded-full ${seccion.color} flex items-center justify-center mr-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-institucional" data-id="formularios-apertura">
+          <div class="p-5">
+            <div class="flex items-center mb-3">
+              <div class="w-8 h-8 rounded-full ${seccion.color} flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
-              <h3 class="text-xl font-semibold text-gray-900">Formularios de Apertura</h3>
+              <h3 class="text-lg font-semibold text-gray-900">Formularios de Apertura</h3>
             </div>
             
-            <div class="mb-6">
-              <div class="flex border-b border-gray-200 overflow-x-auto">
-                <div class="form-tab active" data-tab="personas-fisicas">Personas Físicas</div>
-                <div class="form-tab" data-tab="personas-juridicas">Personas Jurídicas</div>
+            <div class="mb-4">
+              <div class="flex border-b border-gray-200 overflow-x-auto tab-container">
+                <div class="tab active" data-tab="personas-fisicas">Personas Físicas</div>
+                <div class="tab" data-tab="personas-juridicas">Personas Jurídicas</div>
               </div>
               
-              <div class="py-4">
+              <div class="py-3">
                 <!-- Personas Físicas -->
-                <div class="form-content active" id="tab-personas-fisicas">
-                  <div class="bg-gray-50 p-4 rounded-lg">
+                <div class="tab-content active" id="tab-personas-fisicas">
+                  <div class="bg-gray-50 p-4 rounded-md">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div class="card bg-white p-4 rounded-lg shadow-sm">
-                        <h4 class="font-semibold text-lg mb-2">Formulario de Apertura</h4>
-                        <p class="text-gray-600 mb-4">Formulario para la apertura de cuenta de personas físicas.</p>
-                        <a href="formularios/persona-fisica-formulario.pdf" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-lg text-sm font-medium text-center">
+                      <div class="card bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex items-center mb-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                          </svg>
+                          <h4 class="font-semibold text-base">Formulario de Apertura</h4>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">Formulario para la apertura de cuenta de personas físicas.</p>
+                        <a href="formularios/persona-fisica-formulario.pdf" target="_blank" class="btn-primary inline-block px-3 py-1.5 rounded-md text-xs font-medium text-center">
                           Descargar Formulario
                         </a>
                       </div>
                       
-                      <div class="card bg-white p-4 rounded-lg shadow-sm">
-                        <h4 class="font-semibold text-lg mb-2">Requisitos de Apertura</h4>
-                        <p class="text-gray-600 mb-4">Documentación necesaria para la apertura de cuenta.</p>
-                        <a href="formularios/persona-fisica-requisitos.pdf" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-lg text-sm font-medium text-center">
+                      <div class="card bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex items-center mb-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                          </svg>
+                          <h4 class="font-semibold text-base">Requisitos de Apertura</h4>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">Documentación necesaria para la apertura de cuenta.</p>
+                        <a href="formularios/persona-fisica-requisitos.pdf" target="_blank" class="btn-primary inline-block px-3 py-1.5 rounded-md text-xs font-medium text-center">
                           Descargar Requisitos
                         </a>
                       </div>
@@ -825,21 +1149,31 @@
                 </div>
                 
                 <!-- Personas Jurídicas -->
-                <div class="form-content" id="tab-personas-juridicas">
-                  <div class="bg-gray-50 p-4 rounded-lg">
+                <div class="tab-content" id="tab-personas-juridicas">
+                  <div class="bg-gray-50 p-4 rounded-md">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div class="card bg-white p-4 rounded-lg shadow-sm">
-                        <h4 class="font-semibold text-lg mb-2">Formulario de Apertura</h4>
-                        <p class="text-gray-600 mb-4">Formulario para la apertura de cuenta de personas jurídicas.</p>
-                        <a href="formularios/persona-juridica-formulario.pdf" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-lg text-sm font-medium text-center">
+                      <div class="card bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex items-center mb-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                          </svg>
+                          <h4 class="font-semibold text-base">Formulario de Apertura</h4>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">Formulario para la apertura de cuenta de personas jurídicas.</p>
+                        <a href="formularios/persona-juridica-formulario.pdf" target="_blank" class="btn-primary inline-block px-3 py-1.5 rounded-md text-xs font-medium text-center">
                           Descargar Formulario
                         </a>
                       </div>
                       
-                      <div class="card bg-white p-4 rounded-lg shadow-sm">
-                        <h4 class="font-semibold text-lg mb-2">Requisitos de Apertura</h4>
-                        <p class="text-gray-600 mb-4">Documentación necesaria para la apertura de cuenta.</p>
-                        <a href="formularios/persona-juridica-requisitos.pdf" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-lg text-sm font-medium text-center">
+                      <div class="card bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex items-center mb-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                          </svg>
+                          <h4 class="font-semibold text-base">Requisitos de Apertura</h4>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">Documentación necesaria para la apertura de cuenta.</p>
+                        <a href="formularios/persona-juridica-requisitos.pdf" target="_blank" class="btn-primary inline-block px-3 py-1.5 rounded-md text-xs font-medium text-center">
                           Descargar Requisitos
                         </a>
                       </div>
@@ -856,14 +1190,18 @@
     }
     
     function configurarPestañasCuentas() {
-      const tabs = document.querySelectorAll('.account-tab');
+      const tabs = document.querySelectorAll('.tab[data-tab]');
       if (tabs.length === 0) return;
       
       tabs.forEach(tab => {
         tab.addEventListener('click', function() {
-          // Desactivar todas las pestañas
-          document.querySelectorAll('.account-tab').forEach(t => t.classList.remove('active'));
-          document.querySelectorAll('.account-content').forEach(c => c.classList.remove('active'));
+          // Identificar el contenedor de pestañas
+          const tabContainer = this.closest('.tab-container');
+          const tabContents = tabContainer.parentElement.querySelectorAll('.tab-content');
+          
+          // Desactivar todas las pestañas en este contenedor
+          tabContainer.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+          tabContents.forEach(c => c.classList.remove('active'));
           
           // Activar la pestaña seleccionada
           this.classList.add('active');
@@ -874,21 +1212,8 @@
     }
     
     function configurarPestañasFormularios() {
-      const tabs = document.querySelectorAll('.form-tab');
-      if (tabs.length === 0) return;
-      
-      tabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-          // Desactivar todas las pestañas
-          document.querySelectorAll('.form-tab').forEach(t => t.classList.remove('active'));
-          document.querySelectorAll('.form-content').forEach(c => c.classList.remove('active'));
-          
-          // Activar la pestaña seleccionada
-          this.classList.add('active');
-          const tabId = this.getAttribute('data-tab');
-          document.getElementById(`tab-${tabId}`).classList.add('active');
-        });
-      });
+      // Ya está cubierto por la función configurarPestañasCuentas
+      // que ahora maneja todas las pestañas con el selector '.tab[data-tab]'
     }
     
     function configurarBotonesCopiar() {
@@ -939,22 +1264,22 @@
       toastMessage.textContent = mensaje;
       
       if (tipo === "error") {
-        toast.classList.add("bg-red-600");
-        toast.classList.remove("bg-gray-800");
+        toast.querySelector('svg').classList.remove("text-green-400");
+        toast.querySelector('svg').classList.add("text-red-400");
       } else {
-        toast.classList.add("bg-gray-800");
-        toast.classList.remove("bg-red-600");
+        toast.querySelector('svg').classList.add("text-green-400");
+        toast.querySelector('svg').classList.remove("text-red-400");
       }
       
-      toast.classList.remove("translate-y-10", "opacity-0");
+      toast.classList.add("show");
       
       setTimeout(() => {
-        toast.classList.add("translate-y-10", "opacity-0");
+        toast.classList.remove("show");
       }, 3000);
     }
     
     // Inicializar la aplicación cuando se carga la página
     document.addEventListener("DOMContentLoaded", inicializar);
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93fcf817a2c50ec7',t:'MTc0NzI1MjY5NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
-</html>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'945e41be20961fe6',t:'MTc0ODI3MjgyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html> 
