@@ -2,7 +2,7 @@
 const semanal = {
   fecha: "19 de Junio 2023",
   numeroSemana: 25,
-  resumenEjecutivo: "La semana pasada los mercados mostraron un comportamiento mixto, con tecnológicas liderando las ganancias mientras que sectores defensivos retrocedieron. La FED mantuvo tasas pero señaló posibles alzas adicionales en 2023.",
+  resumenEjecutivo: "Laomportamiento mixto, con tecnológicas liderando las ganancias mientras que sectores defensivos retrocedieron. La FED mantuvo tasas pero señaló posibles alzas adicionales en 2023.",
   puntosClave: [
     "Inflación en EEUU continúa su tendencia a la baja",
     "BCE subió tasas 25 puntos básicos como se esperaba",
