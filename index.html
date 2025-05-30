@@ -58,7 +58,7 @@
       box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
     }
     
-    .card-body {
+    .card- {
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -252,7 +252,7 @@
     }
   </style>
 </head>
-<body>
+<>
   <!-- Main Content Section - Automatically shown without login -->
   <div class="flex flex-col min-h-screen" id="contenido">
     <!-- Top Header -->
@@ -376,183 +376,74 @@
       }
     }
     
-    // Render Estrategia section
     function renderizarEstrategia() {
-      const contentContainer = document.getElementById('content-container');
-      
-      contentContainer.innerHTML = `
-        <div class="mb-5">
-          <h1 class="text-2xl font-bold text-gray-900">Estrategia</h1>
-          <p class="text-gray-600 text-sm mt-1">Documentos y análisis para la toma de decisiones.</p>
+  const contentContainer = document.getElementById('content-container');
+  
+  contentContainer.innerHTML = `
+    <div class="mb-5">
+      <h1 class="text-2xl font-bold text-gray-900">Estrategia</h1>
+      <p class="text-gray-600 text-sm mt-1">Documentos y análisis para la toma de decisiones.</p>
+    </div>
+    
+    <div class="tab-container flex mb-4">
+      <div class="tab active" data-tab="reportes">Reportes</div>
+      <div class="tab" data-tab="trade-ideas">Trade Ideas</div>
+      <div class="tab" data-tab="minuta">Minuta Semanal</div>
+    </div>
+    
+    <!-- Reportes Tab -->
+    <div class="tab-content active" id="reportes-tab">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="reportes-container">
+        <!-- … tus cards de Reporte Mensual, Trimestral, Anual … -->
+      </div>
+    </div>
+    
+    <!-- Trade Ideas Tab -->
+    <div class="tab-content" id="trade-ideas-tab">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="trade-ideas-container">
+        <!-- … tus cards de Trade Ideas … -->
+      </div>
+    </div>
+    
+    <!-- Minuta Semanal Tab -->
+    <div class="tab-content" id="minuta-tab">
+      <div class="grid grid-cols-1 gap-5" id="minuta-container">
+        
+        <!-- Minuta Semanal dinámico -->
+        <div id="minuta-semanal"
+             class="card bg-white rounded-lg overflow-hidden shadow-sm section-minuta">
         </div>
         
-        <div class="tab-container flex mb-4">
-          <div class="tab active" data-tab="reportes">Reportes</div>
-          <div class="tab" data-tab="trade-ideas">Trade Ideas</div>
-          <div class="tab" data-tab="minuta">Minuta Semanal</div>
-        </div>
-        
-        <div class="tab-content active" id="reportes-tab">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="reportes-container">
-            <!-- Reporte Mensual -->
-            <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia" data-id="reporte-mensual">
-              <div class="p-5 card-body">
-                <div class="flex items-center mb-3">
-                  <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                  </div>
-                  <h3 class="text-lg font-semibold text-gray-900">Reporte Mensual</h3>
-                </div>
-                <p class="text-gray-600 text-sm mb-4">Análisis mensual de mercados y perspectivas económicas</p>
-                <div class="card-footer mt-auto">
-                  <a href="#" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
-                    Ver último reporte
-                  </a>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Reporte Trimestral -->
-            <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia" data-id="reporte-trimestral">
-              <div class="p-5 card-body">
-                <div class="flex items-center mb-3">
-                  <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                  </div>
-                  <h3 class="text-lg font-semibold text-gray-900">Reporte Trimestral</h3>
-                </div>
-                <p class="text-gray-600 text-sm mb-4">Análisis profundo de tendencias y proyecciones a mediano plazo</p>
-                <div class="card-footer mt-auto">
-                  <a href="#" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
-                    Ver último reporte
-                  </a>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Reporte Anual -->
-            <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia" data-id="reporte-anual">
-              <div class="p-5 card-body">
-                <div class="flex items-center mb-3">
-                  <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                  </div>
-                  <h3 class="text-lg font-semibold text-gray-900">Reporte Anual</h3>
-                </div>
-                <p class="text-gray-600 text-sm mb-4">Perspectivas anuales y estrategias de inversión</p>
-                <div class="card-footer mt-auto">
-                  <a href="#" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
-                    Ver último reporte
-                  </a>
-                </div>
-              </div>
+        <!-- Minutas Anteriores estático -->
+        <div class="card bg-white rounded-lg overflow-hidden shadow-sm">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Minutas Anteriores</h3>
+            <div class="space-y-3">
+              <!-- … entradas estáticas o dinámicas que quieras mantener … -->
             </div>
           </div>
         </div>
         
-        <div class="tab-content" id="trade-ideas-tab">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="trade-ideas-container">
-            <!-- Trade ideas will be loaded here -->
-            <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia">
-              <div class="p-5 card-body">
-                <div class="flex items-center mb-3">
-                  <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                    </svg>
-                  </div>
-                  <h3 class="text-lg font-semibold text-gray-900">Comprar AAPL</h3>
-                </div>
-                <p class="text-gray-600 text-sm mb-2">Oportunidad de entrada en Apple tras corrección</p>
-                <div class="flex items-center text-xs text-gray-500 mb-4">
-                  <span class="mr-2">Publicado: 15/06/2023</span>
-                  <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full">Activa</span>
-                </div>
-                <div class="card-footer mt-auto">
-                  <a href="#" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
-                    Ver detalle
-                  </a>
-                </div>
-              </div>
-            </div>
-            
-            <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia">
-              <div class="p-5 card-body">
-                <div class="flex items-center mb-3">
-                  <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
-                    </svg>
-                  </div>
-                  <h3 class="text-lg font-semibold text-gray-900">Vender TSLA</h3>
-                </div>
-                <p class="text-gray-600 text-sm mb-2">Toma de ganancias en Tesla tras rally</p>
-                <div class="flex items-center text-xs text-gray-500 mb-4">
-                  <span class="mr-2">Publicado: 10/06/2023</span>
-                  <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full">Activa</span>
-                </div>
-                <div class="card-footer mt-auto">
-                  <a href="#" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
-                    Ver detalle
-                  </a>
-                </div>
-              </div>
-            </div>
-            
-            <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia">
-              <div class="p-5 card-body">
-                <div class="flex items-center mb-3">
-                  <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                    </svg>
-                  </div>
-                  <h3 class="text-lg font-semibold text-gray-900">Comprar MSFT</h3>
-                </div>
-                <p class="text-gray-600 text-sm mb-2">Microsoft muestra fortaleza en cloud computing</p>
-                <div class="flex items-center text-xs text-gray-500 mb-4">
-                  <span class="mr-2">Publicado: 05/06/2023</span>
-                  <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded-full">Cerrada</span>
-                </div>
-                <div class="card-footer mt-auto">
-                  <a href="#" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
-                    Ver detalle
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="tab-content" id="minuta-tab">
-          <div class="grid grid-cols-1 gap-5" id="minuta-container">
-            <!-- Minuta Semanal -->
-            <!-- Minuta Semanal -->
-        <div id="minuta-semanal" class="card bg-white rounded-lg overflow-hidden shadow-sm section-minuta"></div>
+      </div>
+    </div>
+  `;
+  
+  // Set up tab switching
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      const tabId = this.getAttribute('data-tab');
       
-      // Set up tab functionality
-      const tabs = document.querySelectorAll('.tab');
-      tabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-          const tabId = this.getAttribute('data-tab');
-          
-          // Update active tab
-          tabs.forEach(t => t.classList.remove('active'));
-          this.classList.add('active');
-          
-          // Show selected tab content
-          const tabContents = document.querySelectorAll('.tab-content');
-          tabContents.forEach(content => content.classList.remove('active'));
-          document.getElementById(`${tabId}-tab`).classList.add('active');
-        });
-      });
-    }
+      tabs.forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+      
+      document.querySelectorAll('.tab-content')
+              .forEach(c => c.classList.remove('active'));
+      document.getElementById(`${tabId}-tab`)
+              .classList.add('active');
+    });
+  });
+}
     
     // Render Institucional section
     function renderizarInstitucional() {
