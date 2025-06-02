@@ -450,10 +450,7 @@
   </div>
 
   <!-- Simulated external JS file for minuta-semanal -->
-  <script>
-    // This simulates the external JS file: reportes/minuta-semanal.js
-    // In a real implementation, this would be in a separate file
-    
+  <script>    
     // IMPORTANT: Update this URL when a new minuta PDF is available
     const MINUTA_SEMANAL_PDF_URL = "reportes/Minuta View Semanal.pdf";
   </script>
@@ -491,7 +488,7 @@
           contenido.classList.remove('hidden');
           
           // Set user name
-          document.getElementById('nombre-usuario').textContent = 'Equipo Comercial';
+          document.getElementById('nombre-usuario').textContent = 'Equipo Vetacap';
           
           // Store login state in session storage
           sessionStorage.setItem('isLoggedIn', 'true');
@@ -605,70 +602,129 @@
         </div>
         
         <div class="tab-container flex mb-4">
+          <div class="tab" data-tab="minuta">Minuta Semanal</div>
           <div class="tab active" data-tab="reportes">Reportes</div>
           <div class="tab" data-tab="trade-ideas">Trade Ideas</div>
-          <div class="tab" data-tab="minuta">Minuta Semanal</div>
         </div>
         
         <div class="tab-content active" id="reportes-tab">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="reportes-container">
-            <!-- Reporte Mensual -->
-            <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia" data-id="reporte-mensual">
-              <div class="p-5 card-body">
-                <div class="flex items-center mb-3">
-                  <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                  </div>
-                  <h3 class="text-lg font-semibold text-gray-900">Reporte Mensual</h3>
+             <!-- Reporte semanal Mesa -->
+          <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia">
+            <div class="p-5 card-body">
+              <div class="flex items-center mb-3">
+                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                  </svg>
                 </div>
-                <p class="text-gray-600 text-sm mb-4">Análisis mensual de mercados y perspectivas económicas</p>
-                <div class="card-footer mt-auto">
-                  <a href="#" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
-                    Ver último reporte
-                  </a>
-                </div>
+                <h3 class="text-lg font-semibold text-gray-900">Reporte Semanal Mesa</h3>
+              </div>
+              <p class="text-gray-600 text-sm mb-4">Análisis semanal de mercados y perspectivas para la mesa de inversiones.</p>
+              <div class="card-footer mt-auto">
+                <a href="reportes/Reporte Semanal Mesa.pdf" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
+                  Ver reporte
+                </a>
               </div>
             </div>
-            
-            <!-- Reporte Trimestral -->
-            <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia" data-id="reporte-trimestral">
-              <div class="p-5 card-body">
-                <div class="flex items-center mb-3">
-                  <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                  </div>
-                  <h3 class="text-lg font-semibold text-gray-900">Reporte Trimestral</h3>
+          </div>
+          
+          <!-- Gestion de Liquidez -->
+          <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia">
+            <div class="p-5 card-body">
+              <div class="flex items-center mb-3">
+                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                  </svg>
                 </div>
-                <p class="text-gray-600 text-sm mb-4">Análisis profundo de tendencias y proyecciones a mediano plazo</p>
-                <div class="card-footer mt-auto">
-                  <a href="#" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
-                    Ver último reporte
-                  </a>
-                </div>
+                <h3 class="text-lg font-semibold text-gray-900">estión de Liquidez</h3>
+              </div>
+              <p class="text-gray-600 text-sm mb-4">Curvas de ARS y Breakevens</p>
+              <div class="card-footer mt-auto">
+                <a href="reportes/Gestion_de_Liquidez.pdf" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
+                  Ver reporte
+                </a>
               </div>
             </div>
-            
-            <!-- Reporte Anual -->
-            <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia" data-id="reporte-anual">
-              <div class="p-5 card-body">
-                <div class="flex items-center mb-3">
-                  <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                  </div>
-                  <h3 class="text-lg font-semibold text-gray-900">Reporte Anual</h3>
+          </div>
+          
+          <!-- Cobertura Cambiaria -->
+          <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia">
+            <div class="p-5 card-body">
+              <div class="flex items-center mb-3">
+                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
                 </div>
-                <p class="text-gray-600 text-sm mb-4">Perspectivas anuales y estrategias de inversión</p>
-                <div class="card-footer mt-auto">
-                  <a href="#" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
-                    Ver último reporte
-                  </a>
+                <h3 class="text-lg font-semibold text-gray-900">Cobertura Cambiaria</h3>
+              </div>
+              <p class="text-gray-600 text-sm mb-4">Curva Dollar linked e instrumentos de cobertura ante variaciones del TC</p>
+              <div class="card-footer mt-auto">
+                <a href="reportes/Cobertura_Cambiaria.pdf" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
+                  Ver reporte
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Cierre CASH -->
+          <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia">
+            <div class="p-5 card-body">
+              <div class="flex items-center mb-3">
+                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
                 </div>
+                <h3 class="text-lg font-semibold text-gray-900">CASH</h3>
+              </div>
+              <p class="text-gray-600 text-sm mb-4">Cierre al dia anterior</p>
+              <div class="card-footer mt-auto">
+                <a href="reportes/cash" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
+                  Ver reporte
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Cierre bonos -->
+          <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia">
+            <div class="p-5 card-body">
+              <div class="flex items-center mb-3">
+                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900">Soberanos</h3>
+              </div>
+              <p class="text-gray-600 text-sm mb-4">Cierre al dia anterior</p>
+              <div class="card-footer mt-auto">
+                <a href="Soberanos" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
+                  Ver reporte
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Seleccion de Activos -->
+          <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia">
+            <div class="p-5 card-body">
+              <div class="flex items-center mb-3">
+                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900">Selección de Activos</h3>
+              </div>
+              <p class="text-gray-600 text-sm mb-4">Informe de los activos recomendados con mayor oportunidad según escenario actual.</p>
+              <div class="card-footer mt-auto">
+                <a href="#" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
+                  Ver reporte
+                </a>
               </div>
             </div>
           </div>
