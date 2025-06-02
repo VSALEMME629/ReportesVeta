@@ -416,10 +416,10 @@
         <!-- Navigation -->
         <div class="nav-container border-b border-gray-200">
           <nav class="flex overflow-x-auto">
-            <div class="nav-item" data-section="institucional">
+            <div class="nav-item active" data-section="institucional">
               Institucional
             </div>
-            <div class="nav-item active" data-section="estrategia">
+            <div class="nav-item" data-section="estrategia">
               Estrategia
             </div>
             <div class="nav-item" data-section="vetaflat">
@@ -602,12 +602,22 @@
         </div>
         
         <div class="tab-container flex mb-4">
-          <div class="tab" data-tab="minuta">Minuta Semanal</div>
-          <div class="tab active" data-tab="reportes">Reportes</div>
+          <div class="tab active" data-tab="minuta">Minuta Semanal</div>
+          <div class="tab" data-tab="reportes">Reportes</div>
           <div class="tab" data-tab="trade-ideas">Trade Ideas</div>
         </div>
         
-        <div class="tab-content active" id="reportes-tab">
+          <div class="tab-content active" id="minuta-tab">
+          <div class="grid grid-cols-1 gap-5" id="minuta-container">
+            <!-- Loading state for minuta semanal -->
+            <div class="loading-container">
+              <div class="loading-spinner mb-4"></div>
+              <p class="text-gray-600">Cargando minuta semanal...</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="tab-content" id="reportes-tab">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="reportes-container">
              <!-- Reporte semanal Mesa -->
           <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia">
@@ -638,9 +648,9 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
                   </svg>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-900">estión de Liquidez</h3>
+                <h3 class="text-lg font-semibold text-gray-900">Gestión de Liquidez</h3>
               </div>
-              <p class="text-gray-600 text-sm mb-4">Curvas de ARS y Breakevens</p>
+              <p class="text-gray-600 text-sm mb-4">Curva ARS y Breakevens</p>
               <div class="card-footer mt-auto">
                 <a href="reportes/Gestion_de_Liquidez.pdf" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
                   Ver reporte
@@ -660,7 +670,7 @@
                 </div>
                 <h3 class="text-lg font-semibold text-gray-900">Cobertura Cambiaria</h3>
               </div>
-              <p class="text-gray-600 text-sm mb-4">Curva Dollar linked e instrumentos de cobertura ante variaciones del TC</p>
+              <p class="text-gray-600 text-sm mb-4">Curva USD linked e instrumentos de cobertura ante variaciones del TC</p>
               <div class="card-footer mt-auto">
                 <a href="reportes/Cobertura_Cambiaria.pdf" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
                   Ver reporte
@@ -800,16 +810,6 @@
                   </a>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="tab-content" id="minuta-tab">
-          <div class="grid grid-cols-1 gap-5" id="minuta-container">
-            <!-- Loading state for minuta semanal -->
-            <div class="loading-container">
-              <div class="loading-spinner mb-4"></div>
-              <p class="text-gray-600">Cargando minuta semanal...</p>
             </div>
           </div>
         </div>
