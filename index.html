@@ -274,6 +274,20 @@
       padding: 2rem;
       text-align: center;
     }
+    
+    /* PDF Viewer */
+    .pdf-viewer {
+      width: 100%;
+      height: 600px;
+      border: 1px solid var(--gray-medium);
+      border-radius: 4px;
+    }
+    
+    .pdf-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -385,6 +399,10 @@
   <script>
     // This simulates the external JS file: reportes/minuta-semanal.js
     // In a real implementation, this would be in a separate file
+    
+    // IMPORTANT: Update this URL when a new minuta PDF is available
+    const MINUTA_SEMANAL_PDF_URL = "reportes/minuta-semanal.pdf";
+    
     function cargarMinutaSemanal() {
       return {
         titulo: "Minuta Semanal - 19 de Junio 2023",
@@ -402,23 +420,7 @@
           "23/06: Datos de inflación PCE en EEUU",
           "23/06: Confianza del consumidor de la Universidad de Michigan"
         ],
-        minutasAnteriores: [
-          {
-            titulo: "Minuta Semanal - 12 de Junio 2023",
-            semana: "Semana 24",
-            url: "#"
-          },
-          {
-            titulo: "Minuta Semanal - 5 de Junio 2023",
-            semana: "Semana 23",
-            url: "#"
-          },
-          {
-            titulo: "Minuta Semanal - 29 de Mayo 2023",
-            semana: "Semana 22",
-            url: "#"
-          }
-        ]
+        pdfUrl: MINUTA_SEMANAL_PDF_URL
       };
     }
   </script>
@@ -776,35 +778,25 @@
                 ${data.proximosEventos.map(evento => `<li>${evento}</li>`).join('')}
               </ul>
             </div>
-            
-            <div class="flex justify-end mt-4">
-              <a href="#" class="btn-secondary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
-                Descargar PDF
-              </a>
-            </div>
           </div>
         </div>
         
-        <!-- Minutas Anteriores -->
+        <!-- PDF Viewer -->
         <div class="card bg-white rounded-lg overflow-hidden shadow-sm">
           <div class="p-5">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Minutas Anteriores</h3>
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Documento Completo</h3>
             
-            <div class="space-y-3">
-              ${data.minutasAnteriores.map(minuta => `
-                <div class="flex justify-between items-center p-3 hover:bg-gray-50 rounded-md transition-colors">
-                  <div class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    <div>
-                      <p class="font-medium text-gray-800">${minuta.titulo}</p>
-                      <p class="text-xs text-gray-500">${minuta.semana}</p>
-                    </div>
-                  </div>
-                  <a href="${minuta.url}" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Descargar</a>
-                </div>
-              `).join('')}
+            <div class="pdf-container">
+              <iframe src="${data.pdfUrl}" class="pdf-viewer" title="Minuta Semanal PDF"></iframe>
+              
+              <div class="pdf-actions">
+                <a href="${data.pdfUrl}" download class="btn-secondary inline-block px-6 py-2 rounded-md text-sm font-medium text-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                  Descargar PDF
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -1205,5 +1197,5 @@
       });
     }
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9480064a4439d7c1',t:'MTc0ODYyNjkxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'94985d8ac0db1ea0',t:'MTc0ODg4MjE0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
