@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -288,6 +287,54 @@
       justify-content: center;
       margin-top: 1rem;
     }
+    
+    /* Error message */
+    .error-message {
+      color: #DC2626;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+    
+    .error-message.show {
+      display: block;
+    }
+    
+    /* User dropdown menu */
+    .user-dropdown {
+      position: relative;
+    }
+    
+    .dropdown-menu {
+      position: absolute;
+      right: 0;
+      top: 100%;
+      width: 200px;
+      background-color: white;
+      border-radius: 0.375rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      padding: 0.5rem 0;
+      margin-top: 0.5rem;
+      z-index: 50;
+      display: none;
+    }
+    
+    .dropdown-menu.show {
+      display: block;
+    }
+    
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      color: #4B5563;
+      transition: all 0.2s ease;
+    }
+    
+    .dropdown-item:hover {
+      background-color: var(--gray-light);
+      color: var(--primary);
+    }
   </style>
 </head>
 <body>
@@ -295,30 +342,27 @@
   <div class="login-container" id="login-screen">
     <div class="login-card">
       <div class="text-center mb-6">
-        <img src="https://via.placeholder.com/150x50?text=VetaCap" alt="Vetacap Logo" class="h-8 mx-auto">
+        <img src="assets/VetaCap_Brandpack_Positivo-RGB.png" alt="Vetacap Logo" class="h-8 mx-auto">
         <h2 class="text-xl font-bold text-gray-900 mt-4">Portal Interno</h2>
         <p class="text-sm text-gray-600 mt-1">Ingresa tus credenciales para acceder</p>
       </div>
       
       <form id="login-form" class="space-y-4">
         <div>
-          <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
-          <input type="email" id="email" name="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="usuario@vetacap.com" required>
+          <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Usuario</label>
+          <input type="text" id="username" name="username" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Ingresa tu usuario" required>
         </div>
         
         <div>
           <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
           <input type="password" id="password" name="password" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="••••••••" required>
+          <div id="login-error" class="error-message">Usuario o contraseña incorrectos. Por favor intenta nuevamente.</div>
         </div>
         
         <div class="flex items-center justify-between">
           <div class="flex items-center">
             <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
             <label for="remember-me" class="ml-2 block text-sm text-gray-700">Recordarme</label>
-          </div>
-          
-          <div class="text-sm">
-            <a href="#" class="font-medium text-blue-600 hover:text-blue-500">¿Olvidaste tu contraseña?</a>
           </div>
         </div>
         
@@ -338,12 +382,12 @@
       <div class="w-full px-4">
         <div class="py-3 flex justify-between items-center">
           <div class="flex items-center">
-            <img src="https://via.placeholder.com/150x50?text=VetaCap" alt="Vetacap Logo" class="h-8">
+            <img src="assets/VetaCap_Brandpack_Positivo-RGB.png" alt="Vetacap Logo" class="h-8">
           </div>
           
           <div class="flex items-center space-x-3">
-            <div class="relative group">
-              <button class="flex items-center space-x-2 focus:outline-none">
+            <div class="relative group user-dropdown">
+              <button class="flex items-center space-x-2 focus:outline-none" id="user-menu-button">
                 <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-semibold text-sm">
                   EC
                 </div>
@@ -355,6 +399,16 @@
                   <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
               </button>
+              
+              <!-- Dropdown Menu -->
+              <div class="dropdown-menu" id="user-dropdown-menu">
+                <div class="dropdown-item" id="logout-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                  </svg>
+                  Cerrar Sesión
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -401,28 +455,7 @@
     // In a real implementation, this would be in a separate file
     
     // IMPORTANT: Update this URL when a new minuta PDF is available
-    const MINUTA_SEMANAL_PDF_URL = "reportes/minuta-semanal.pdf";
-    
-    function cargarMinutaSemanal() {
-      return {
-        titulo: "Minuta Semanal - 19 de Junio 2023",
-        semana: "Semana 25",
-        resumenEjecutivo: "La semana pasada los mercados mostraron un comportamiento mixto, con tecnológicas liderando las ganancias mientras que sectores defensivos retrocedieron. La FED mantuvo tasas pero señaló posibles alzas adicionales en 2023.",
-        puntosClave: [
-          "Inflación en EEUU continúa su tendencia a la baja",
-          "BCE subió tasas 25 puntos básicos como se esperaba",
-          "Datos de empleo en EEUU muestran resiliencia del mercado laboral",
-          "Banco de Japón mantiene política monetaria ultra expansiva"
-        ],
-        proximosEventos: [
-          "21/06: Minutas de la FED",
-          "22/06: PMI preliminar de junio en Europa y EEUU",
-          "23/06: Datos de inflación PCE en EEUU",
-          "23/06: Confianza del consumidor de la Universidad de Michigan"
-        ],
-        pdfUrl: MINUTA_SEMANAL_PDF_URL
-      };
-    }
+    const MINUTA_SEMANAL_PDF_URL = "reportes/Minuta View Semanal.pdf";
   </script>
 
   <script>
@@ -431,33 +464,80 @@
       const loginForm = document.getElementById('login-form');
       const loginScreen = document.getElementById('login-screen');
       const contenido = document.getElementById('contenido');
+      const loginError = document.getElementById('login-error');
+      const userMenuButton = document.getElementById('user-menu-button');
+      const userDropdownMenu = document.getElementById('user-dropdown-menu');
+      const logoutButton = document.getElementById('logout-button');
       
+      // Check if user is already logged in (from session storage)
+      if (sessionStorage.getItem('isLoggedIn') === 'true') {
+        loginScreen.classList.add('hidden');
+        contenido.classList.remove('hidden');
+        renderizarSeccionActual();
+      }
+      
+      // Login form submission
       loginForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
         // Get form values
-        const email = document.getElementById('email').value;
+        const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
         
-        // Simple validation - any email with @vetacap.com domain is accepted
-        if (email.includes('@vetacap.com')) {
+        // Validate credentials
+        if (username === 'comercial' && password === 'vetacap2024') {
           // Hide login screen and show content
           loginScreen.classList.add('hidden');
           contenido.classList.remove('hidden');
           
-          // Set user name from email
-          const userName = email.split('@')[0];
-          document.getElementById('nombre-usuario').textContent = userName.charAt(0).toUpperCase() + userName.slice(1);
+          // Set user name
+          document.getElementById('nombre-usuario').textContent = 'Equipo Comercial';
+          
+          // Store login state in session storage
+          sessionStorage.setItem('isLoggedIn', 'true');
           
           // Show welcome notification
           mostrarNotificacion('Bienvenido al Portal Interno');
           
           // Load initial content (Estrategia section)
           renderizarSeccionActual();
+          
+          // Reset form and hide error
+          loginForm.reset();
+          loginError.classList.remove('show');
         } else {
-          // Show error for invalid email
-          alert('Por favor ingresa un correo con dominio @vetacap.com');
+          // Show error for invalid credentials
+          loginError.classList.add('show');
         }
+      });
+      
+      // User menu dropdown toggle
+      userMenuButton.addEventListener('click', function() {
+        userDropdownMenu.classList.toggle('show');
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!userMenuButton.contains(e.target) && !userDropdownMenu.contains(e.target)) {
+          userDropdownMenu.classList.remove('show');
+        }
+      });
+      
+      // Logout functionality
+      logoutButton.addEventListener('click', function() {
+        // Clear session storage
+        sessionStorage.removeItem('isLoggedIn');
+        
+        // Show login screen and hide content
+        loginScreen.classList.remove('hidden');
+        contenido.classList.add('hidden');
+        
+        // Reset form
+        loginForm.reset();
+        loginError.classList.remove('show');
+        
+        // Close dropdown
+        userDropdownMenu.classList.remove('show');
       });
       
       // Navigation functionality
@@ -696,25 +776,21 @@
           
           // If minuta tab is selected, load minuta data
           if (tabId === 'minuta') {
-            cargarDatosMinuta();
+            cargarMinutaSemanal();
           }
         });
       });
     }
     
-    // Function to load minuta data from external JS
-    function cargarDatosMinuta() {
+    // Function to load minuta semanal
+    function cargarMinutaSemanal() {
       const minutaContainer = document.getElementById('minuta-container');
       
-      // Simulate loading from external JS file
-      // In a real implementation, this would be an actual fetch or import
+      // Simulate loading
       setTimeout(() => {
         try {
-          // Get data from the simulated external JS
-          const minutaData = cargarMinutaSemanal();
-          
-          // Render minuta with the loaded data
-          renderizarMinuta(minutaData);
+          // Render minuta with the PDF viewer
+          renderizarMinutaSemanal();
         } catch (error) {
           minutaContainer.innerHTML = `
             <div class="bg-red-50 p-4 rounded-md">
@@ -727,23 +803,23 @@
                 <div class="ml-3">
                   <h3 class="text-sm font-medium text-red-800">Error al cargar la minuta semanal</h3>
                   <div class="mt-2 text-sm text-red-700">
-                    <p>No se pudo cargar el archivo reportes/minuta-semanal.js</p>
+                    <p>No se pudo cargar el archivo de la minuta semanal</p>
                   </div>
                 </div>
               </div>
             </div>
           `;
-          console.error('Error al cargar minuta-semanal.js:', error);
+          console.error('Error al cargar minuta semanal:', error);
         }
       }, 800); // Simulate network delay
     }
     
-    // Function to render minuta with data from external JS
-    function renderizarMinuta(data) {
+    // Function to render minuta semanal with PDF viewer
+    function renderizarMinutaSemanal() {
       const minutaContainer = document.getElementById('minuta-container');
       
       minutaContainer.innerHTML = `
-        <!-- Minuta Semanal -->
+        <!-- Minuta Semanal PDF Viewer -->
         <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-minuta">
           <div class="p-5">
             <div class="flex items-center mb-4">
@@ -753,44 +829,16 @@
                 </svg>
               </div>
               <div>
-                <h3 class="text-lg font-semibold text-gray-900">${data.titulo}</h3>
-                <p class="text-sm text-gray-500">${data.semana}</p>
+                <h3 class="text-lg font-semibold text-gray-900">Minuta Semanal</h3>
+                <p class="text-sm text-gray-500">Documento completo</p>
               </div>
             </div>
             
-            <div class="mb-4">
-              <h4 class="font-medium text-gray-900 mb-2">Resumen Ejecutivo</h4>
-              <p class="text-gray-600 text-sm">
-                ${data.resumenEjecutivo}
-              </p>
-            </div>
-            
-            <div class="mb-4">
-              <h4 class="font-medium text-gray-900 mb-2">Puntos Clave</h4>
-              <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
-                ${data.puntosClave.map(punto => `<li>${punto}</li>`).join('')}
-              </ul>
-            </div>
-            
-            <div class="mb-4">
-              <h4 class="font-medium text-gray-900 mb-2">Próximos Eventos</h4>
-              <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
-                ${data.proximosEventos.map(evento => `<li>${evento}</li>`).join('')}
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <!-- PDF Viewer -->
-        <div class="card bg-white rounded-lg overflow-hidden shadow-sm">
-          <div class="p-5">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Documento Completo</h3>
-            
             <div class="pdf-container">
-              <iframe src="${data.pdfUrl}" class="pdf-viewer" title="Minuta Semanal PDF"></iframe>
+              <iframe src="${MINUTA_SEMANAL_PDF_URL}" class="pdf-viewer" title="Minuta Semanal PDF"></iframe>
               
               <div class="pdf-actions">
-                <a href="${data.pdfUrl}" download class="btn-secondary inline-block px-6 py-2 rounded-md text-sm font-medium text-center">
+                <a href="${MINUTA_SEMANAL_PDF_URL}" download class="btn-secondary inline-block px-6 py-2 rounded-md text-sm font-medium text-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
                   </svg>
@@ -1197,5 +1245,5 @@
       });
     }
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'94985d8ac0db1ea0',t:'MTc0ODg4MjE0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'94987aab21eb203e',t:'MTc0ODg4MzMzNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
