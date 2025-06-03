@@ -826,9 +826,12 @@
           tabContents.forEach(content => content.classList.remove('active'));
           document.getElementById(`${tabId}-tab`).classList.add('active');
           
-          // If minuta tab is selected, load minuta data
-          if (tabId === 'minuta') {
+          // Load Minuta Semanal content immediately since it's the active tab
             cargarMinutaSemanal();
+          
+          // If minuta tab is selected, load minuta data
+          if (tabId === 'trade-ideas') {
+            cargarTradeIdeas();
           }
         });
       });
