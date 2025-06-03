@@ -607,9 +607,38 @@
           <div class="tab" data-tab="trade-ideas">Trade Ideas</div>
         </div>
         
-        <div class="tab-content" id="minuta-tab">
-          <div class="grid grid-cols-1 gap-5" id="minuta-container">
-    <!-- Minuta semanal content will be loaded here -->
+        <!-- Minuta Semanal Tab (Active by default) -->
+    <div class="tab-content active" id="minuta-tab">
+      <div class="grid grid-cols-1 gap-5" id="minuta-container">
+        <!-- Minuta Semanal PDF Viewer -->
+        <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-minuta">
+          <div class="p-5">
+            <div class="flex items-center mb-4">
+              <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-gray-900">Minuta Semanal</h3>
+                <p class="text-sm text-gray-500">Full document</p>
+              </div>
+            </div>
+            
+            <div class="pdf-container">
+              <iframe src="/reportes/minuta-semanal.pdf" class="pdf-viewer" title="Minuta Semanal PDF"></iframe>
+              
+              <div class="pdf-actions">
+                <a href="/reportes/minuta-semanal.pdf" download class="btn-secondary inline-block px-6 py-2 rounded-md text-sm font-medium text-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                  Descargar PDF
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
         
@@ -736,82 +765,87 @@
           </div>
         </div>
         
-        <div class="tab-content" id="trade-ideas-tab">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="trade-ideas-container">
-            <!-- Trade ideas will be loaded here -->
-            <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia">
-              <div class="p-5 card-body">
-                <div class="flex items-center mb-3">
-                  <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                    </svg>
-                  </div>
-                  <h3 class="text-lg font-semibold text-gray-900">Comprar AAPL</h3>
-                </div>
-                <p class="text-gray-600 text-sm mb-2">Oportunidad de entrada en Apple tras corrección</p>
-                <div class="flex items-center text-xs text-gray-500 mb-4">
-                  <span class="mr-2">Publicado: 15/06/2023</span>
-                  <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full">Activa</span>
-                </div>
-                <div class="card-footer mt-auto">
-                  <a href="#" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
-                    Ver detalle
-                  </a>
-                </div>
+        <!-- Trade Ideas Tab -->
+    <div class="tab-content" id="trade-ideas-tab">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="trade-ideas-container">
+        <!-- Trade Idea 1 -->
+        <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia">
+          <div class="p-5 card-body">
+            <div class="flex items-center mb-3">
+              <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
               </div>
+              <h3 class="text-lg font-semibold text-gray-900">Comprar AAPL</h3>
             </div>
-            
-            <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia">
-              <div class="p-5 card-body">
-                <div class="flex items-center mb-3">
-                  <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
-                    </svg>
-                  </div>
-                  <h3 class="text-lg font-semibold text-gray-900">Vender TSLA</h3>
-                </div>
-                <p class="text-gray-600 text-sm mb-2">Toma de ganancias en Tesla tras rally</p>
-                <div class="flex items-center text-xs text-gray-500 mb-4">
-                  <span class="mr-2">Publicado: 10/06/2023</span>
-                  <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full">Activa</span>
-                </div>
-                <div class="card-footer mt-auto">
-                  <a href="#" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
-                    Ver detalle
-                  </a>
-                </div>
-              </div>
+            <p class="text-gray-600 text-sm mb-2">Oportunidad de entrada en Apple tras corrección</p>
+            <div class="flex items-center text-xs text-gray-500 mb-4">
+              <span class="mr-2">Publicado: 15/06/2023</span>
+              <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full">Activa</span>
             </div>
-            
-            <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia">
-              <div class="p-5 card-body">
-                <div class="flex items-center mb-3">
-                  <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                    </svg>
-                  </div>
-                  <h3 class="text-lg font-semibold text-gray-900">Comprar MSFT</h3>
-                </div>
-                <p class="text-gray-600 text-sm mb-2">Microsoft muestra fortaleza en cloud computing</p>
-                <div class="flex items-center text-xs text-gray-500 mb-4">
-                  <span class="mr-2">Publicado: 05/06/2023</span>
-                  <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded-full">Cerrada</span>
-                </div>
-                <div class="card-footer mt-auto">
-                  <a href="#" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
-                    Ver detalle
-                  </a>
-                </div>
-              </div>
+            <div class="card-footer mt-auto">
+              <a href="#" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
+                Ver detalle
+              </a>
             </div>
           </div>
         </div>
-      `;
-      
-       // Set up tab functionality
+        
+        <!-- Trade Idea 2 -->
+        <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia">
+          <div class="p-5 card-body">
+            <div class="flex items-center mb-3">
+              <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900">Vender TSLA</h3>
+            </div>
+            <p class="text-gray-600 text-sm mb-2">Toma de ganancias en Tesla tras rally</p>
+            <div class="flex items-center text-xs text-gray-500 mb-4">
+              <span class="mr-2">Publicado: 10/06/2023</span>
+              <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full">Activa</span>
+            </div>
+            <div class="card-footer mt-auto">
+              <a href="#" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
+                Ver detalle
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Trade Idea 3 -->
+        <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-estrategia">
+          <div class="p-5 card-body">
+            <div class="flex items-center mb-3">
+              <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900">Comprar MSFT</h3>
+            </div>
+            <p class="text-gray-600 text-sm mb-2">Microsoft muestra fortaleza en cloud computing</p>
+            <div class="flex items-center text-xs text-gray-500 mb-4">
+              <span class="mr-2">Publicado: 05/06/2023</span>
+              <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded-full">Cerrada</span>
+            </div>
+            <div class="card-footer mt-auto">
+              <a href="#" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
+                Ver detalle
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+        <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set up tab functionality
       const tabs = document.querySelectorAll('.tab');
       tabs.forEach(tab => {
         tab.addEventListener('click', function() {
@@ -825,86 +859,10 @@
           const tabContents = document.querySelectorAll('.tab-content');
           tabContents.forEach(content => content.classList.remove('active'));
           document.getElementById(`${tabId}-tab`).classList.add('active');
-          
-          // Load content based on selected tab
-          if (tabId === 'minuta') {
-            cargarMinutaSemanal();
-          } else if (tabId === 'trade-ideas') {
-            // If you have a function to load trade ideas
-            // cargarTradeIdeas();
-          }
         });
       });
-      
-      // Since Minuta Semanal is the active tab by default, load its content immediately
-      cargarMinutaSemanal();
-    }
-    
-    // Function to load minuta semanal
-    function cargarMinutaSemanal() {
-      try {
-        // Render minuta with the PDF viewer immediately
-        renderizarMinutaSemanal();
-      } catch (error) {
-        const minutaContainer = document.getElementById('minuta-container');
-        minutaContainer.innerHTML = `
-          <div class="bg-red-50 p-4 rounded-md">
-            <div class="flex">
-              <div class="flex-shrink-0">
-                <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-                </svg>
-              </div>
-              <div class="ml-3">
-                <h3 class="text-sm font-medium text-red-800">Error al cargar la minuta semanal</h3>
-                <div class="mt-2 text-sm text-red-700">
-                  <p>No se pudo cargar el archivo de la minuta semanal</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-        console.error('Error al cargar minuta semanal:', error);
-      }
-    }
-    
-    // Function to render minuta semanal with PDF viewer
-    function renderizarMinutaSemanal() {
-      const minutaContainer = document.getElementById('minuta-container');
-      
-      minutaContainer.innerHTML = `
-        <!-- Minuta Semanal PDF Viewer -->
-        <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-minuta">
-          <div class="p-5">
-            <div class="flex items-center mb-4">
-              <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center mr-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-lg font-semibold text-gray-900">Minuta Semanal</h3>
-                <p class="text-sm text-gray-500">Documento completo</p>
-              </div>
-            </div>
-            
-            <div class="pdf-container">
-              <iframe src="${MINUTA_SEMANAL_PDF_URL}" class="pdf-viewer" title="Minuta Semanal PDF"></iframe>
-              
-              <div class="pdf-actions">
-                <a href="${MINUTA_SEMANAL_PDF_URL}" download class="btn-secondary inline-block px-6 py-2 rounded-md text-sm font-medium text-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
-                  </svg>
-                  Descargar PDF
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-    
+    });
+
     // Render Institucional section
     function renderizarInstitucional() {
       const contentContainer = document.getElementById('content-container');
