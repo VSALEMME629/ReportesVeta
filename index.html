@@ -809,15 +809,9 @@
             </div>
           </div>
         </div>
-        
-        <div class="tab-content active" id="minuta-tab">
-          <div class="grid grid-cols-1 gap-5" id="minuta-container">
-            <!-- Minuta semanal content will be loaded here -->
-          </div>
-        </div>
       `;
       
-      // Set up tab functionality
+       // Set up tab functionality
       const tabs = document.querySelectorAll('.tab');
       tabs.forEach(tab => {
         tab.addEventListener('click', function() {
@@ -844,8 +838,8 @@
       
       // Since Minuta Semanal is the active tab by default, load its content immediately
       cargarMinutaSemanal();
-      }
-      
+    }
+    
     // Function to load minuta semanal
     function cargarMinutaSemanal() {
       try {
