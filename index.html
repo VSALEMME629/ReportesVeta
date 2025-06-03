@@ -277,7 +277,7 @@
     /* PDF Viewer */
     .pdf-viewer {
       width: 100%;
-      height: 600px;
+      height: 800px;
       border: 1px solid var(--gray-medium);
       border-radius: 4px;
     }
@@ -866,134 +866,222 @@
     // Render Institucional section
     function renderizarInstitucional() {
       const contentContainer = document.getElementById('content-container');
-      
+       
       contentContainer.innerHTML = `
-        <div class="mb-5">
-          <h1 class="text-2xl font-bold text-gray-900">Institucional</h1>
-          <p class="text-gray-600 text-sm mt-1">Documentos y recursos corporativos.</p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          <!-- Presentación Corporativa -->
-          <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-institucional">
-            <div class="p-5 card-body">
-              <div class="flex items-center mb-3">
-                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
-                  </svg>
+            <div class="mb-5">
+              <h1 class="text-2xl font-bold text-gray-900">Institucional</h1>
+              <p class="text-gray-600 text-sm mt-1">Documentos y recursos corporativos.</p>
+            </div>
+            
+            <!-- PPT Institucional -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+              <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-institucional">
+                <div class="p-5 card-body">
+                  <div class="flex items-center mb-3">
+                    <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                      </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900">PPT Institucional</h3>
+                  </div>
+                  <p class="text-gray-600 text-sm mb-4">Presentación general de Vetacap para clientes y prospectos</p>
+                  <div class="card-footer mt-auto">
+                    <button class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                      </svg>
+                      Descargar presentación
+                    </button>
+                  </div>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-900">Presentación Corporativa</h3>
               </div>
-              <p class="text-gray-600 text-sm mb-4">Presentación general de Vetacap para clientes y prospectos</p>
-              <div class="card-footer mt-auto">
-                <a href="#" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
-                  Ver presentación
-                </a>
+            </div>
+            
+            <!-- Fondeo Account Information -->
+            <div class="mb-8">
+              <h2 class="section-title">Información de Cuentas de Fondeo</h2>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <!-- Cuenta corriente en pesos -->
+                <div class="account-card">
+                  <h3 class="account-title">Cuenta Corriente en Pesos</h3>
+                  <div class="account-info">
+                    <div><strong>Banco:</strong> Banco Galicia</div>
+                    <div><strong>Titular:</strong> Vetacap S.A.</div>
+                    <div><strong>CUIT:</strong> 30-71234567-8</div>
+                  </div>
+                  <div class="account-number">
+                    CBU: 0070019420000012345678
+                  </div>
+                  <div class="account-info mt-2">
+                    <div><strong>Alias:</strong> VETACAP.PESOS.CC</div>
+                  </div>
+                </div>
+                
+                <!-- Cuenta corriente en USD -->
+                <div class="account-card">
+                  <h3 class="account-title">Cuenta Corriente en USD</h3>
+                  <div class="account-info">
+                    <div><strong>Banco:</strong> Banco Galicia</div>
+                    <div><strong>Titular:</strong> Vetacap S.A.</div>
+                    <div><strong>CUIT:</strong> 30-71234567-8</div>
+                  </div>
+                  <div class="account-number">
+                    CBU: 0070019428000087654321
+                  </div>
+                  <div class="account-info mt-2">
+                    <div><strong>Alias:</strong> VETACAP.USD.CC</div>
+                  </div>
+                </div>
+                
+                <!-- Cuenta ACDyC en pesos -->
+                <div class="account-card">
+                  <h3 class="account-title">Cuenta ACDyC en Pesos</h3>
+                  <div class="account-info">
+                    <div><strong>Entidad:</strong> Caja de Valores S.A.</div>
+                    <div><strong>Titular:</strong> Vetacap S.A.</div>
+                    <div><strong>CUIT:</strong> 30-71234567-8</div>
+                  </div>
+                  <div class="account-number">
+                    Cuenta Comitente: 12345
+                  </div>
+                  <div class="account-info mt-2">
+                    <div><strong>Referencia:</strong> VETACAP-PESOS-ACDYC</div>
+                  </div>
+                </div>
+                
+                <!-- Cuenta ACDyC en USD -->
+                <div class="account-card">
+                  <h3 class="account-title">Cuenta ACDyC en USD</h3>
+                  <div class="account-info">
+                    <div><strong>Entidad:</strong> Caja de Valores S.A.</div>
+                    <div><strong>Titular:</strong> Vetacap S.A.</div>
+                    <div><strong>CUIT:</strong> 30-71234567-8</div>
+                  </div>
+                  <div class="account-number">
+                    Cuenta Comitente: 12346
+                  </div>
+                  <div class="account-info mt-2">
+                    <div><strong>Referencia:</strong> VETACAP-USD-ACDYC</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Formularios de Apertura -->
+            <div class="mb-8">
+              <h2 class="section-title">Formularios de Apertura</h2>
+              
+              <div class="form-tab-container">
+                <div class="form-tab active" data-form-tab="personas-fisicas">Personas Físicas</div>
+                <div class="form-tab" data-form-tab="personas-juridicas">Personas Jurídicas</div>
+              </div>
+              
+              <!-- Personas Físicas Tab Content -->
+              <div class="form-content active" id="personas-fisicas-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <!-- Formulario de Apertura -->
+                  <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-institucional">
+                    <div class="p-5 card-body">
+                      <div class="flex items-center mb-3">
+                        <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                          </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900">Formulario de Apertura</h3>
+                      </div>
+                      <p class="text-gray-600 text-sm mb-4">Formulario para apertura de cuenta para personas físicas</p>
+                      <div class="card-footer mt-auto">
+                        <button class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                          </svg>
+                          Descargar PDF
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Requisitos de Apertura -->
+                  <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-institucional">
+                    <div class="p-5 card-body">
+                      <div class="flex items-center mb-3">
+                        <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                          </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900">Requisitos de Apertura</h3>
+                      </div>
+                      <p class="text-gray-600 text-sm mb-4">Documentación requerida para apertura de cuenta para personas físicas</p>
+                      <div class="card-footer mt-auto">
+                        <button class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                          </svg>
+                          Descargar PDF
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Personas Jurídicas Tab Content -->
+              <div class="form-content" id="personas-juridicas-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <!-- Formulario de Apertura -->
+                  <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-institucional">
+                    <div class="p-5 card-body">
+                      <div class="flex items-center mb-3">
+                        <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                          </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900">Formulario de Apertura</h3>
+                      </div>
+                      <p class="text-gray-600 text-sm mb-4">Formulario para apertura de cuenta para personas jurídicas</p>
+                      <div class="card-footer mt-auto">
+                        <button class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                          </svg>
+                          Descargar PDF
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Requisitos de Apertura -->
+                  <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-institucional">
+                    <div class="p-5 card-body">
+                      <div class="flex items-center mb-3">
+                        <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                          </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900">Requisitos de Apertura</h3>
+                      </div>
+                      <p class="text-gray-600 text-sm mb-4">Documentación requerida para apertura de cuenta para personas jurídicas</p>
+                      <div class="card-footer mt-auto">
+                        <button class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                          </svg>
+                          Descargar PDF
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           
-          <!-- Manual de Marca -->
-          <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-institucional">
-            <div class="p-5 card-body">
-              <div class="flex items-center mb-3">
-                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                  </svg>
-                </div>
-                <h3 class="text-lg font-semibold text-gray-900">Manual de Marca</h3>
-              </div>
-              <p class="text-gray-600 text-sm mb-4">Guía de uso de la marca Vetacap y recursos gráficos</p>
-              <div class="card-footer mt-auto">
-                <a href="#" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
-                  Ver manual
-                </a>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Recursos Gráficos -->
-          <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-institucional">
-            <div class="p-5 card-body">
-              <div class="flex items-center mb-3">
-                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <h3 class="text-lg font-semibold text-gray-900">Recursos Gráficos</h3>
-              </div>
-              <p class="text-gray-600 text-sm mb-4">Logos, plantillas y otros recursos gráficos de la marca</p>
-              <div class="card-footer mt-auto">
-                <a href="#" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
-                  Ver recursos
-                </a>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Políticas Internas -->
-          <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-institucional">
-            <div class="p-5 card-body">
-              <div class="flex items-center mb-3">
-                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                </div>
-                <h3 class="text-lg font-semibold text-gray-900">Políticas Internas</h3>
-              </div>
-              <p class="text-gray-600 text-sm mb-4">Documentos de políticas y procedimientos internos</p>
-              <div class="card-footer mt-auto">
-                <a href="#" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
-                  Ver políticas
-                </a>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Organigrama -->
-          <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-institucional">
-            <div class="p-5 card-body">
-              <div class="flex items-center mb-3">
-                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
-                </div>
-                <h3 class="text-lg font-semibold text-gray-900">Organigrama</h3>
-              </div>
-              <p class="text-gray-600 text-sm mb-4">Estructura organizacional de la empresa</p>
-              <div class="card-footer mt-auto">
-                <a href="#" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
-                  Ver organigrama
-                </a>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Calendario Corporativo -->
-          <div class="card bg-white rounded-lg overflow-hidden shadow-sm section-institucional">
-            <div class="p-5 card-body">
-              <div class="flex items-center mb-3">
-                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center mr-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <h3 class="text-lg font-semibold text-gray-900">Calendario Corporativo</h3>
-              </div>
-              <p class="text-gray-600 text-sm mb-4">Eventos, reuniones y fechas importantes</p>
-              <div class="card-footer mt-auto">
-                <a href="#" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-md text-sm font-medium text-center">
-                  Ver calendario
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
       `;
     }
     
