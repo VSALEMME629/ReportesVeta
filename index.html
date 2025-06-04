@@ -265,17 +265,13 @@
       background-color: var(--gray-light);
     }
     
-    .vetaflat-faq-answer {
-      padding: 0;
-      max-height: 0;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      background-color: #f8fafc;
+   .vetaflat-faq-answer {
+      padding: 0 1rem 1rem;
+      display: none;
     }
     
     .vetaflat-faq-answer.active {
-      padding: 1rem;
-      max-height: 500px;
+      display: block;
     }
     
     .vetaflat-faq-icon {
@@ -1163,7 +1159,7 @@
       contentContainer.innerHTML = `
         <div class="mb-5">
           <h1 class="text-2xl font-bold text-gray-900">VetaFlat</h1>
-          <p class="text-gray-600 text-sm mt-1">Plataforma de inversión inmobiliaria.</p>
+          <p class="text-gray-600 text-sm mt-1">Retail.</p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="reportes-vetaflat">
@@ -1230,7 +1226,6 @@
                   </div>
                   <div class="vetaflat-faq-answer">
                     <p class="text-gray-600">
-
 ✅ Opciones: 0,15% + DDM 0,2% = 0,35% + IVA (21%) = 0,4235% NETO
 ✅ Bonos: 0,15% + DDM 0,1% = 0,25% NETO (No paga IVA)
 ✅ Letras: 0,15% + DDM 0,2% = 0,35% NETO (No paga IVA)
