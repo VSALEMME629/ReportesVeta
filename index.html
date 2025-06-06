@@ -438,13 +438,6 @@
           <div id="login-error" class="error-message">Usuario o contraseña incorrectos. Por favor intenta nuevamente.</div>
         </div>
         
-        <div class="flex items-center justify-between">
-          <div class="flex items-center">
-            <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-            <label for="remember-me" class="ml-2 block text-sm text-gray-700">Recordarme</label>
-          </div>
-        </div>
-        
         <div>
           <button type="submit" class="w-full btn-primary py-2 px-4 rounded-md text-sm font-medium">
             Ingresar
@@ -561,7 +554,7 @@
         const password = document.getElementById('password').value;
         
         // Validate credentials
-        if (username === 'comercial' && password === 'vetacap2024') {
+        if (username === '' && password === '') {
           // Hide login screen and show content
           loginScreen.classList.add('hidden');
           contenido.classList.remove('hidden');
