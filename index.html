@@ -528,6 +528,7 @@
   </script>
 
   <script>
+    /*
     // Login functionality
     document.addEventListener('DOMContentLoaded', function() {
       const loginForm = document.getElementById('login-form');
@@ -545,7 +546,6 @@
         renderizarSeccionActual();
       }
         
-      /*
       // Login form submission
       loginForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -555,11 +555,10 @@
         const password = document.getElementById('password').value;
         
         // Validate credentials
-        if (username ===  && password === ) {
+        if (username === " " && password === " " ) {
           // Hide login screen and show content
           loginScreen.classList.add('hidden');
           contenido.classList.remove('hidden');
-      
       
           // Set user name
           document.getElementById('nombre-usuario').textContent = 'Equipo Vetacap';
@@ -581,7 +580,6 @@
           loginError.classList.add('show');
         }
       });
-        */
       
       // User menu dropdown toggle
       userMenuButton.addEventListener('click', function() {
@@ -594,7 +592,8 @@
           userDropdownMenu.classList.remove('show');
         }
       });
-      
+      */
+    
       // Logout functionality
       logoutButton.addEventListener('click', function() {
         // Clear session storage
